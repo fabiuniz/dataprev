@@ -270,7 +270,7 @@ public class AnalisadorFraudeIA {
 
 ```
 
-```merm
+```mermaid
 sequenceDiagram
     autonumber
     actor WebServer as WebServer.java
