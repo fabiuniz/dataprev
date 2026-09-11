@@ -234,7 +234,6 @@ public class AnalisadorFraudeIA {
    ├──> 2. Configura a Camada de Idempotência (Redis + Postgres via Decorator)
    ├──> 3. Instancia o CheckoutService injetando essas dependências
    ├──> 4. Cria as Estratégias de Pagamento (Pix, Cartão, Boleto, VR)
-   │
    └──> 5. Passa o controle para o [RunnerEstudos.java]
 
        ┌─────────────────────────────────────────────────────────┐
@@ -307,7 +306,7 @@ sequenceDiagram
 - [ ] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
 - [ ] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
 
-❌ Falta
+❌ Falta aprender:
 - [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
 - [ ] Camada de Concorrência SQL: Adicionar uma coluna chave_idempotencia VARCHAR UNIQUE na tabela tb_pagamentos.
 - [ ] Gerenciamento de Threads: Setar um ThreadPoolExecutor no WebServer.
