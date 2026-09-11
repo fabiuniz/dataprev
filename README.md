@@ -184,7 +184,7 @@ public class AnalisadorFraudeIA {
  - [ ] SSL / TLS
 ## 🛠️ Ferramentas, DevOps e Qualidade de Código
  - [x] GIT (Gestão de configuração)
- - SonarQube (Análise estática de código)
+ - [ ]SonarQube (Análise estática de código)
  - [x] JUnit (Framework de testes)
  - [x] Containers (Docker/Podman implícitos)
  - [x] DevOps (Conceitos e cultura)
@@ -195,7 +195,7 @@ public class AnalisadorFraudeIA {
  - [x] Orquestração de Serviços
  - [x] Transações Distribuídas (⚛️ Atomicidade)
  - [x] Arquitetura e Linguagem Orientada a Objetos
- - Arquitetura Orientada a Serviços (SOA)
+ - [ ] Arquitetura Orientada a Serviços (SOA)
  - [x] Mensageria (Message Brokers AWS SQS)
  - [x] Clean Code
  - [x] Padrões de desenvolvimento e reuso (Design Patterns)
@@ -292,35 +292,33 @@ sequenceDiagram
 ## 📋 Anotações gerais
 
 🧱 Basicamente, o que ja possuo um Sistema transacional que:
- - 🌐 Recebe uma requisição da web─> [ WebServer.java / index.html ]
- - ⚡ Trata a concorrência e duplicidade em cache ──> [ PagamentoIdempotenteRedisRepository.java ]
- - 💾 Persiste em banco SQL ─> [ PagamentoPostgresRepository.java ]
- - 📨 Notifica o cliente final ─> [ EmailNotificadorService.java ]
- - 🧪 Faz testes unitários ──> [ CheckoutSOLIDTest.java ]
- - 🧩 Aplica polimorfismo e padrões SOLID no domínio ──> [ domain/MetodoPagamento.java / Switch Executions ]
- - ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
+- [x] 🌐 Recebe uma requisição da web─> [ WebServer.java / index.html ]
+- [x] ⚡ Trata a concorrência e duplicidade em cache ──> [ PagamentoIdempotenteRedisRepository.java ]
+- [x] 💾 Persiste em banco SQL ─> [ PagamentoPostgresRepository.java ]
+- [x] 📨 Notifica o cliente final ─> [ EmailNotificadorService.java ]
+- [x] 🧪 Faz testes unitários ──> [ CheckoutSOLIDTest.java ]
+- [x] 🧩 Aplica polimorfismo e padrões SOLID no domínio ──> [ domain/MetodoPagamento.java / Switch Executions ]
+- [x] ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
 
+🧠Você aprendeu que:
+- [ ] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
+- [ ] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
+- [ ] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
+- [ ] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
+- [ ] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
 
 ❌ Falta
- - Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
- - Camada de Concorrência SQL: Adicionar uma coluna chave_idempotencia VARCHAR UNIQUE na tabela tb_pagamentos.
- - Gerenciamento de Threads: Setar um ThreadPoolExecutor no WebServer.
- - Limpeza de Trava: Excluir a chave do Redis caso o bloco do Postgres lance uma exceção, liberando o cliente para tentar novamente.
+- [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
+- [ ] Camada de Concorrência SQL: Adicionar uma coluna chave_idempotencia VARCHAR UNIQUE na tabela tb_pagamentos.
+- [ ] Gerenciamento de Threads: Setar um ThreadPoolExecutor no WebServer.
+- [ ] Limpeza de Trava: Excluir a chave do Redis caso o bloco do Postgres lance uma exceção, liberando o cliente para tentar novamente.
+- [ ] Rest e RestFull
 
 🤔Spring = "transforma em objetos" = Inversão de Controle (IoC) = new = fabricar = orientado objeto
 new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
-
-Rest e RestFull
 
 🤔mensageria -> pode resolver depois / Cirtuit Break -> tem que resolver na hora fallback
 (Escrita) Circuit Breaker com Fallback assíncrono (Mensageria/Filas) para garantir a consistência eventual.
 (Leitura) Circuit Breaker com Fallback síncrono (Cache/Valores Padrão). A mensageria não se aplica porque viola a necessidade de resposta em tempo real (síncrona) do usuário.
 
 🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
-
-🧠Você aprendeu que:
-- uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
-- as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
-- o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
-- o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
-- a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
