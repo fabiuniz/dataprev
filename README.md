@@ -4,6 +4,7 @@ Description: 🏛️ Programa de treinamento focado na preparação integral par
 technical_requirement: Lógica de Programação, Estrutura de Dados, Networking, Inglês Técnico, Resolução de Problemas.
 skills: Aprendizado Contínuo, Design de Sistemas Escaláveis, Metodologias Ágeis (Scrum/Kanban), DevOps e CI/CD, Pensamento Crítico e Análise, Comunicação Interpessoal, Autogestão de Tempo, Liderança e Mentoria.
 professions: Desenvolvedor(a) Full Stack, Engenheiro(a) de Dados, Cientista de Dados, Engenheiro(a) de DevOps, Especialista em Cibersegurança, Arquiteto(a) of Software, Gerente de Produto (PM).
+Tags: Fund, Dev, Skils
 path_hook: hookfigma.hook9, hookfigma.hook7, hookfigma.hook13
 -->
 
@@ -61,9 +62,9 @@ solid_hybrid/
 
 ### Task 01: Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
-* **[√] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
-* **[√] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
-* **[√] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
+* **[x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
+* **[x] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
+* **[x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
 * **[ ] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
 ### Task 02 & 03: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
@@ -125,7 +126,7 @@ Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
 > 
 > 
 ## 📋 Sprint Atual: Task 02 & 03 (Foco: Spring + Kotlin)
-- [√] Migrar a injeção de dependência manual da Main para Beans do Spring
+- [x] Migrar a injeção de dependência manual da Main para Beans do Spring
 - [ ] Implementar `@Transactional(propagation = Propagation.REQUIRES_NEW)` e testar comportamento
 - [ ] Criar cenário de teste simulando a quebra de transação (Pegadinha clássica da FGV)> 
 
@@ -145,10 +146,10 @@ public class AnalisadorFraudeIA {
     ---
 
 ## 💻 Linguagens de Programação e Tecnologias Core já adquiridos nesse programa de treinamento:
- - [√] Java (versão 6 ou superior)
- - [√] Javascript
- - [√] HTML
- - [√] CSS
+ - [x] Java (versão 6 ou superior)
+ - [x] Javascript
+ - [x] HTML
+ - [x] CSS
 ## 📦 Frameworks, Bibliotecas e APIs (Ecossistema Java/Web)
  - [ ] JavaEE (versão 6 ou superior) / JakartaEE
  - [ ] JPA (Java Persistence API - versão 2 ou superior)
@@ -158,12 +159,12 @@ public class AnalisadorFraudeIA {
  - [ ] SpringCloud 
  - [ ] JSF (JavaServer Faces)
  - [ ] Primefaces
- - [√] Ajax
+ - [x] Ajax
 ## 🎨 Frontend Frameworks e Padrões Web
  - [ ] VueJS
  - [ ] Angular
  - [ ] React
- - [√] SPA (Single Page Application)
+ - [x] SPA (Single Page Application)
  - PWA (Progressive Web App)
 ## 📱 Mobile, Automatização e Ferramentas Modernas
  - [ ] Android
@@ -175,34 +176,34 @@ public class AnalisadorFraudeIA {
  - [ ] XML
  - [ ] XSLT
  - [ ] UDDI
- - [√] REST (🔄 Idempotência UUID)
- - [√] JSON
- - [√] Web services
- - [√] Swagger (Documentação de APIs)
+ - [x] REST (🔄 Idempotência UUID)
+ - [x] JSON
+ - [x] Web services
+ - [x] Swagger (Documentação de APIs)
  - [ ] HTTPS
  - [ ] SSL / TLS
 ## 🛠️ Ferramentas, DevOps e Qualidade de Código
- - [√] GIT (Gestão de configuração)
+ - [x] GIT (Gestão de configuração)
  - SonarQube (Análise estática de código)
- - [√] JUnit (Framework de testes)
- - [√] Containers (Docker/Podman implícitos)
- - [√] DevOps (Conceitos e cultura)
- - [√] API Gateway
+ - [x] JUnit (Framework de testes)
+ - [x] Containers (Docker/Podman implícitos)
+ - [x] DevOps (Conceitos e cultura)
+ - [x] API Gateway
 ## 📐 Arquitetura, Design e Modelagem (Hardskills Conceituais)
- - [√] Arquitetura de Microsserviços
+ - [x] Arquitetura de Microsserviços
  - Arquitetura Hexagonal
- - [√] Orquestração de Serviços
- - [√] Transações Distribuídas (⚛️ Atomicidade)
- - [√] Arquitetura e Linguagem Orientada a Objetos
+ - [x] Orquestração de Serviços
+ - [x] Transações Distribuídas (⚛️ Atomicidade)
+ - [x] Arquitetura e Linguagem Orientada a Objetos
  - Arquitetura Orientada a Serviços (SOA)
- - [√] Mensageria (Message Brokers AWS SQS)
- - [√] Clean Code
- - [√] Padrões de desenvolvimento e reuso (Design Patterns)
- - [√] Servidor de aplicações e Servidor web
+ - [x] Mensageria (Message Brokers AWS SQS)
+ - [x] Clean Code
+ - [x] Padrões de desenvolvimento e reuso (Design Patterns)
+ - [x] Servidor de aplicações e Servidor web
 ## 🧪 Engenharia de Testes (Test-driven development (TDD) , Testes Ágeis , Teste de Usabilidade de Software , Gestão do Ciclo de Vida de Testes)
- - [√] Testes Unitários
- - [√] Testes de Integração
- - [√] Testes Automatizados
+ - [x] Testes Unitários
+ - [x] Testes de Integração
+ - [x] Testes Automatizados
 ## 📊 Métricas, Requisitos e Gestão Ágil
  - [ ] Metodologia de Ponto de Função (APF)
  - [ ] Story Points
@@ -210,7 +211,7 @@ public class AnalisadorFraudeIA {
  - [ ] Scrum
  - [ ] Kanban
  - [ ] XP (Extreme Programming)
- - [√] Workflow
+ - [x] Workflow
 ## 🎨 Design de Experiência (UX/UI) e Portais
  - [ ] UX (User Experience)
  - [ ] Arquitetura de Informação
