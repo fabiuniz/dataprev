@@ -2,6 +2,12 @@
 clear
 
 # =====================================================================
+# 0. Limpeza de instâncias anteriores (Evita Address already in use)
+# =====================================================================
+echo "🧹 Encerrando instâncias antigas da aplicação..."
+pkill -f com.tqi.checkout.Main 2>/dev/null || true
+
+# =====================================================================
 # 1. Configurações e Variáveis
 # =====================================================================
 PG_CONTAINER="pg-checkout"

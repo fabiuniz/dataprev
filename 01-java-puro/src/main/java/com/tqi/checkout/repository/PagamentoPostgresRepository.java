@@ -1,10 +1,11 @@
 package com.tqi.checkout.repository;
 
 import com.tqi.checkout.domain.MetodoPagamento;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +25,9 @@ public class PagamentoPostgresRepository implements PagamentoRepository {
     }
 
     @Override
-    public void salvar(MetodoPagamento pagamento, double valor, String emailCliente, String chaveIdempotencia) {
+    public void salvar(MetodoPagamento pagamento, double valorPrimitivo, String emailCliente, String chaveIdempotencia) {
         String nomePagamento = pagamento.getClass().getSimpleName();
-        
-        String createTableSql = """
-            CREATE TABLE IF NOT EXISTS tb_pagamentos (
-                id SERIAL PRIMARY KEY,
-                metodo_id VARCHAR(100) NOT NULL,
-                valor NUMERIC(10, 2) NOT NULL,
-                email_cliente VARCHAR(255) NOT NULL,
-                status VARCHAR(50) NOT NULL,
-                chave_idempotencia VARCHAR(255) NOT NULL UNIQUE
-            );
-        """;
+        BigDecimal valor = BigDecimal.valueOf(valorPrimitivo); // Conversão para evitar imprecisão de double
         
         String insertSql = """
             INSERT INTO tb_pagamentos (metodo_id, valor, email_cliente, status, chave_idempotencia) 
@@ -45,20 +36,27 @@ public class PagamentoPostgresRepository implements PagamentoRepository {
 
         // Abre a conexão e executa o bloco de transação de forma segura
         try (Connection conn = getConnection()) {
-            // 1. Garante que a tabela existe
-            try (Statement stmt = conn.createStatement()) {
-                stmt.execute(createTableSql);
-            }
+            // 1. Controle Transacional Explícito (Exigência FGV)
+            conn.setAutoCommit(false); 
 
             // 2. Insere o registro real no Postgres
             try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
                 pstmt.setString(1, nomePagamento);
-                pstmt.setDouble(2, valor);
+                pstmt.setBigDecimal(2, valor); // Uso de setBigDecimal para colunas NUMERIC
                 pstmt.setString(3, emailCliente);
                 pstmt.setString(4, "PROCESSADO");
-                pstmt.setString(5, chaveIdempotencia); // Resolvido: Vinculando a chave real contra colisões UNIQUE
+                pstmt.setString(5, chaveIdempotencia);
                 
                 pstmt.executeUpdate();
+                
+                // 2. Confirma a transação se tudo ocorrer bem
+                conn.commit();
+                System.out.println("🐘 [POSTGRES REAL] Transação de R$ " + valor + " gravada com sucesso! ✅");
+            } catch (SQLException e) {
+                // 3. Reverte a transação em caso de erro no SQL
+                conn.rollback();
+                System.err.println("🚨 🐘 [POSTGRES ROLLBACK] Transação revertida devido a erro: " + e.getMessage());
+                throw e;
             }
             System.out.println("🐘 [POSTGRES REAL] Transação de R$ " + valor + " gravada com sucesso! ✅");
 
