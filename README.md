@@ -15,7 +15,7 @@ Este repositório foi estruturado de forma híbrida e evolutiva com o objetivo d
 O projeto simula um ecossistema de **Checkout de Missão Crítica** evoluindo do Java Puro (sem frameworks) até arquiteturas reativas modernas com Spring Boot e Kotlin Coroutines.
 
 <p align="center">
-  <img src="images/screenshot.jpg" alt="Banner DATAPREV 2026 - Laboratório de Engenharia e Arquitetura de Software" width="100%">
+  <img src="images/screenshot.png" alt="Banner DATAPREV 2026 - Laboratório de Engenharia e Arquitetura de Software" width="100%">
 </p>
 
 ---
