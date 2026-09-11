@@ -1,0 +1,3 @@
+https://www.youtube.com/watch?v=s7UD68W3pZ0
+
+Escolha um projeto java springboot/Kotlin respeitando o SOLID, crie os requisitos que faz sentido e crie um roteiro seguindo as orientações e entregue um codigo completo e funcional em um .sh para escrever no disco representando em pratica o ensinamento!

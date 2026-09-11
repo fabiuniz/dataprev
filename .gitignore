@@ -1,0 +1,45 @@
+# =====================================================================
+# IDEs e Ferramentas de Desenvolvimento
+# =====================================================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.project
+.classpath
+.settings/
+sftp-config.json
+
+# =====================================================================
+# Build, Compilação e Dependências Locais
+# =====================================================================
+bin/
+build/
+target/
+out/
+*.class
+*.jar
+jars/
+**/jars/
+
+# =====================================================================
+# Arquivos Temporários de Sistema e Logs
+# =====================================================================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+fontes_main.txt
+fontes_test.txt
+join_ext.txt
+
+# =====================================================================
+# Arquivos de Configuração de Ambiente / Dados Locais de Teste
+# =====================================================================
+.env
+*.sqlite
+*.db
+# Imagens geradas ou rascunhos pesados
+*.jfif
+images/*.jfif
