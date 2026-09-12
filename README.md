@@ -60,7 +60,7 @@ solid_hybrid/
 
 ## 📅 Cronograma Prático de Evolução (Foco na Prova Objetiva)
 
-### 🧱Task 01: Fundações, Infraestrutura e Padrões de Criação.
+### 🧱Task 01 (01-java-puro): Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
 * **Tópicos Críticos do Edital**:
     - [x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
@@ -68,7 +68,7 @@ Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manua
     - [x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
     - [x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
-### ⚙️Task 02: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+### ⚙️Task 02 (java-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, e integrando a mensageria da AWS SQS via Spring Cloud AWS.
 * **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
@@ -78,7 +78,7 @@ Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanc
     - [x] Análise de Propagação: Compreensão prática e teste dos comportamentos entre Propagation.REQUIRED (padrão) e Propagation.REQUIRES_NEW.
     - [x] Persistência Relacional: Conexão bem-sucedida com o PostgreSQL, mapeamento de entidades via JPA/Hibernate e tratamento de constraints de unicidade (como a chave de idempotência).
 
-### 🔄Task 03: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+### 🔄Task 03 (java-kotlin-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
 * **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
@@ -88,14 +88,14 @@ Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanc
     - [ ] Resiliência & Fail-Open: Mecanismo defensivo testado onde falhas no Redis ou no SQS não derrubam a requisição principal do cliente (degradação graciosa).
     - [ ] Interoperabilidade Java + Kotlin: Introdução de arquivos Kotlin (.kt) integrados no mesmo projeto Maven/Gradle do Spring Boot, aproveitando recursos como imutabilidade, construtores primários e interpolação de strings lado a lado com o Java.
 
-### 🛡️Task 04: Resiliência em Sistemas Distribuídos e Segurança (LGPD).
+### 🛡️Task 04 (kotlin-spring-boot): Resiliência em Sistemas Distribuídos e Segurança (LGPD).
 Aplica programação reativa, resiliência (Resilience4j) e criptografia de dados (LGPD) totalmente em Kotlin.
 * **O que desenvolver**: Simular falhas em chamadas de rede externas e aplicar criptografia de dados sensíveis.
 * **Tópicos Críticos do Edital**:
     - [ ] Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
     - [ ] Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
 
-### ⚡Task 05: Alta Concorrência e Programação Assíncrona.
+### ⚡Task 05 (kotlin-puro): Alta Concorrência e Programação Assíncrona.
 Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead do Spring.
 * **O que desenvolver**: Criar um processador de lote (batch) de concorrência massiva para simular a fila de processamentos da Dataprev.
 * **Tópicos Críticos do Edital**:
@@ -103,7 +103,7 @@ Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead d
     - [ ] Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
     - [ ] Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
 
-### 📨Task 06: Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
+### 📨Task 06 (kafka-event-driven): Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
 Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Apache Kafka, consolidando a automação de qualidade e entrega contínua em pipeline.
 * **O que desenvolver**: Implementar mensageria com Spring Kafka e configurar a esteira de integração contínua (CI) validando a cobertura de código automaticamente.
 * **Tópicos Críticos do Edital**:
