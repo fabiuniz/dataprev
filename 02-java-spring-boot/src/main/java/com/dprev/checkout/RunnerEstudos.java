@@ -1,33 +1,32 @@
 package com.dprev.checkout;
 
-import com.dprev.checkout.domain.strategy.PixPagamento;
-import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
-import com.dprev.checkout.domain.strategy.BoletoPagamento;
-import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
 import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium;
+import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
+import com.dprev.checkout.domain.strategy.PixPagamento;
+import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
 import com.dprev.checkout.service.CheckoutService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class RunnerEstudos implements CommandLineRunner {
 
-    private final CheckoutService checkout;
+    private final CheckoutService checkoutService;
     private final PixPagamento pix;
     private final CartaoCreditoPagamento cartaoCredito;
-    private final BoletoPagamento shadowBoleto; // Corrigido o nome para coincidir com o uso interno
+    private final CartaoCorporativoPremium cartaoCorp;
     private final ValeRefeicaoPagamento vr;
-    private final CartaoCorporativoPremium cartaoCorp; // Corrigido de cartaoCor para cartaoCorp
 
-    // Injeção de dependência pelo construtor do Spring Boot
-    public RunnerEstudos(CheckoutService checkout, PixPagamento pix, CartaoCreditoPagamento cartaoCredito,
-                         BoletoPagamento shadowBoleto, ValeRefeicaoPagamento vr, CartaoCorporativoPremium cartaoCorp) {
-        this.checkout = checkout;
+    public RunnerEstudos(CheckoutService checkoutService,
+                         PixPagamento pix,
+                         CartaoCreditoPagamento cartaoCredito,
+                         CartaoCorporativoPremium cartaoCorp,
+                         ValeRefeicaoPagamento vr) {
+        this.checkoutService = checkoutService;
         this.pix = pix;
         this.cartaoCredito = cartaoCredito;
-        this.shadowBoleto = shadowBoleto;
-        this.vr = vr;
         this.cartaoCorp = cartaoCorp;
+        this.vr = vr;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class RunnerEstudos implements CommandLineRunner {
             System.out.println("[ALERTA ERRO] LSP Quebrado sob análise: " + e.getMessage());
             System.out.println("✅ SUCESSO AUTOMATIZADO: O Spring tratou a exceção do polimorfismo restrito.");
         }
-        
+
         System.out.println("\n🚀 ========================================================");
         System.out.println("🚀 TESTES CONCLUÍDOS. O SERVIDOR CONTINUA ATIVO NA PORTA 8080.");
         System.out.println("🚀 ========================================================\n");
