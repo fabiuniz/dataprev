@@ -21,7 +21,26 @@ public class PagamentoPostgresRepository implements PagamentoRepository {
         // Carrega o driver do Postgres em runtime (Java Puro)
         Class.forName("org.postgresql.Driver");
         String url = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
-        return DriverManager.getConnection(url, USER, PASSWORD);
+        Connection conn = DriverManager.getConnection(url, USER, PASSWORD);
+
+        // 🛠️ Integrado na rotina: Cria a tabela automaticamente se ela não existir
+        String createTableSql = """
+            CREATE TABLE IF NOT EXISTS tb_pagamentos (
+                id SERIAL PRIMARY KEY,
+                metodo_id VARCHAR(50) NOT NULL,
+                valor NUMERIC(15, 2) NOT NULL,
+                email_cliente VARCHAR(255) NOT NULL,
+                status VARCHAR(50) NOT NULL,
+                chave_idempotencia VARCHAR(255) NOT NULL,
+                data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(createTableSql)) {
+            stmt.execute();
+        }
+
+        return conn;
     }
 
     @Override
