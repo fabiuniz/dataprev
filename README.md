@@ -134,28 +134,31 @@ Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
     . reset.sh
     ```
 
-> ⚠️ **Aviso de Edital**: A prova objetiva da FGV será realizada no dia **11 de outubro de 2026**. Foque nos Conhecimentos Específicos (Peso 2.5), use este laboratório para sanar dúvidas de comportamento de código e revise os logs gerados na tela para validar os teoremas da banca.
+> ⚠️ **Aviso de Edital**: Use este laboratório para sanar dúvidas de comportamento de código e revise os logs gerados na tela para validar os teoremas da banca.
 > 
 > estou usando as diversas combinações das linguagens para me ajudar com gatilhos mentais em assimilar as razões porque as coisas são assim nesse ecosistema!
 > 
 > 
-## 📋 Sprint Atual: Task 02 & 03 (Foco: Spring + Kotlin)
-- [x] Migrar a injeção de dependência manual da Main para Beans do Spring
-- [ ] Implementar `@Transactional(propagation = Propagation.REQUIRES_NEW)` e testar comportamento
-- [ ] Criar cenário de teste simulando a quebra de transação (Pegadinha clássica da FGV)> 
-
 ```bash
 
 /**
- * 🧠 GATILHO MEMÓRIA - BLOCO I (IA APLICADA) - QUESTÃO 21 DO SIMULADO
- * * [FGV CONCEITO]: Este analisador utiliza regras explícitas (Árvore de Decisão Heurística).
- * Diferença para IA Generativa (LLMs): IA Preditiva foca em classificação e score de risco 
- * com base em dados históricos estruturados. LLMs focam em probabilidade de distribuição de tokens textuais.
+ * 🧠 GATILHO DE MEMÓRIA — BLOCO I (IA APLICADA) | QUESTÃO 21 (SIMULADO FGV)
+ * 
+ * [CONTEXTO DA BANCA - FGV]: 
+ * Distinção fundamental cobrada em provas de TI para órgãos públicos:
+ * 1. Sistemas Especialistas / Árvores de Decisão Heurísticas: Baseados em regras 
+ *    explícitas "if-then", determinísticos e sem aprendizado estatístico autônomo.
+ * 2. Machine Learning / IA Preditiva: Foco em classificação, regressão e score de 
+ *    risco baseados em dados históricos estruturados.
+ * 3. IA Generativa (LLMs): Foco em modelos probabilísticos de distribuição de 
+ *    tokens textuais para geração de conteúdo e linguagem natural.
  */
-public class AnalisadorFraudeIA {
-    // seu código aqui...
-}
-
+const FGV_AI_DECISION_HEURISTIC = Object.freeze({
+    type: 'Heuristic Decision Tree',
+    deterministic: true,
+    targetConcept: 'Rule-based vs Statistical Probability',
+    examBoard: 'FGV'
+});
 ```
     ---
 
@@ -314,11 +317,11 @@ sequenceDiagram
 - [x] ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
 
 🧠Você aprendeu que:
-- [ ] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
-- [ ] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
-- [ ] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
-- [ ] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
-- [ ] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
+- [x] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
+- [x] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
+- [x] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
+- [x] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
+- [x] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
 
 ❌ Falta aprender:
 - [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
