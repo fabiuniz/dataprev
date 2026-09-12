@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TQI Checkout - SOLID</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .checkout-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { color: #1e293b; margin-top: 0; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #64748b; font-weight: 600; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; }
+        input:focus, select:focus { outline: none; border-color: #3b82f6; }
+        button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #1d4ed8; }
+        #log-area { margin-top: 20px; padding: 12px; border-radius: 6px; font-size: 14px; display: none; line-height: 1.4; }
+        .success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    </style>
+</head>
+<body>
+
+<div class="checkout-card">
+    <h2>🛒 Finalizar Pedido</h2>
+    
+    <div class="form-group">
+        <label for="email">E-mail do Cliente</label>
+        <input type="email" id="email" value="fabiano@email.com" placeholder="exemplo@email.com">
+    </div>
+
+    <div class="form-group">
+        <label for="valor">Valor (R$)</label>
+        <input type="number" id="valor" value="250.00" step="0.01">
+    </div>
+
+    <div class="form-group">
+        <label for="metodo">Método de Pagamento</label>
+        <select id="metodo">
+            <option value="pix">⚡ PIX</option>
+            <option value="cartao">💳 Cartão de Crédito</option>
+            <option value="boleto">📄 Boleto Bancário</option>
+            <option value="vr">🍔 Vale Refeição (Limite R$300)</option>
+        </select>
+    </div>
+
+    <button onclick="enviarPagamento()">Confirmar Pagamento</button>
+
+    <div id="log-area"></div>
+</div>
+
+<script>
+    async function enviarPagamento() {
+        const logArea = document.getElementById('log-area');
+        const payload = {
+            email: document.getElementById('email').value,
+            valor: parseFloat(document.getElementById('valor').value),
+            metodo: document.getElementById('metodo').value
+        };
+
+        logArea.style.display = 'block';
+        logArea.className = '';
+        logArea.innerText = '⏳ Processando transação distribuída...';
+
+        try {
+            // Dispara um POST real com o JSON para o servidor nativo em Java
+            const resposta = await fetch('http://vmlinuxd:8080/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const textoResultado = await resposta.text();
+
+            if (resposta.ok) {
+                logArea.classList.add('success');
+                logArea.innerText = '✅ ' + textoResultado;
+            } else {
+                logArea.classList.add('error');
+                logArea.innerText = '❌ Erro: ' + textoResultado;
+            }
+        } catch (error) {
+            logArea.className = 'error';
+            logArea.innerText = '🚨 Servidor Java offline ou erro de rede.';
+        }
+    }
+</script>
+</body>
+</html>

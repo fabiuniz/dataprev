@@ -4,9 +4,10 @@ clear
 # =====================================================================
 # 0. Limpeza de instâncias anteriores (Evita Address already in use)
 # =====================================================================
+echo "🧹 Parando todos os containers Docker da máquina..."
+docker stop $(docker ps -q) 2>/dev/null || true
 echo "🧹 Encerrando instâncias antigas da aplicação..."
 pkill -f com.tqi.checkout.Main 2>/dev/null || true
-
 # =====================================================================
 # 1. Configurações e Variáveis
 # =====================================================================
@@ -14,7 +15,7 @@ PG_CONTAINER="pg-checkout"
 REDIS_CONTAINER="redis-checkout"
 LOCALSTACK_CONTAINER="localstack-checkout"
 
-FOLDER_JAR="jars"
+FOLDER_JAR="../jars"
 mkdir -p "$FOLDER_JAR"
 DRIVER_JAR="$FOLDER_JAR/postgresql-42.7.3.jar"
 JEDIS_JAR="$FOLDER_JAR/jedis-4.4.3.jar"

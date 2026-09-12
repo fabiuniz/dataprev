@@ -9,7 +9,7 @@ import com.tqi.checkout.service.CheckoutService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class RunnerEstudos implements CommandLineRunner {
 
     private final CheckoutService checkout;

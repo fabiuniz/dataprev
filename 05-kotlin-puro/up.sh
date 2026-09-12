@@ -1,4 +1,13 @@
 #!/bin/bash
+# =====================================================================
+# 0. Limpeza total de containers Docker e instâncias
+# =====================================================================
+echo "🧹 Parando todos os containers Docker da máquina..."
+docker stop $(docker ps -aq) 2>/dev/null || true
+echo "🗑️ Removendo containers antigos para evitar conflitos..."
+docker rm $(docker ps -aq) 2>/dev/null || true
+
+
 
 # 1. Verifica se o kotlinc existe. Se não existir, avisa o usuário
 if ! command -v kotlinc &> /dev/null; then
