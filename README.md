@@ -67,13 +67,25 @@ Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manua
 * **[x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
 * **[x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
-### Task 02 & 03: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+### Task 02: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
 * **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
-    * [ ]Ciclo de vida e escopo de Beans do Spring (`@Component`, `@Service`, `@Repository`, `@Scope`).
-    * [ ]Uso correto da anotação @Transactional e os riscos dos modos de propagação (REQUIRED vs REQUIRES_NEW).
-    * [ ]Integração com AWS SQS usando SqsTemplate ou @SqsListener no Spring Boot.
+    * [ ] Inversão de Controle (IoC) & Beans: A instanciação manual (new) foi completamente eliminada das regras de negócio e substituída por injeção via construtor com anotações do Spring (@Component, @Service, @Repository).
+    * [ ] Escopos de Beans: Validação de que o ciclo de vida dos componentes obedece ao padrão do container (Singleton por padrão, e entendimento prático de @Scope("prototype") quando necessário).
+    * [ ] Controle Transacional (@Transactional): O serviço de checkout gerencia transações com segurança, garantindo rollback automático em caso de exceções (rollbackFor = Exception.class).
+    * [ ] Análise de Propagação: Compreensão prática e teste dos comportamentos entre Propagation.REQUIRED (padrão) e Propagation.REQUIRES_NEW.
+    * [ ] Persistência Relacional: Conexão bem-sucedida com o PostgreSQL, mapeamento de entidades via JPA/Hibernate e tratamento de constraints de unicidade (como a chave de idempotência).
+
+### Task 03: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
+* **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
+* **Tópicos Críticos do Edital**:
+    * [ ] Infraestrutura de Nuvem Local: Subida e validação automatizada dos containers de suporte (PostgreSQL, Redis para cache/lock distribuído, e LocalStack para SQS).
+    * [ ] Spring Cloud AWS (SqsTemplate): O serviço produtor envia com sucesso mensagens de comprovante de pagamento para a fila SQS no LocalStack (localhost:4566).
+    * [ ] Consumo Assíncrono (@SqsListener): Implementação do listener no Spring Boot capaz de capturar e processar as mensagens da fila de forma assíncrona.
+    * [ ] Resiliência & Fail-Open: Mecanismo defensivo testado onde falhas no Redis ou no SQS não derrubam a requisição principal do cliente (degradação graciosa).
+    * [ ] Interoperabilidade Java + Kotlin: Introdução de arquivos Kotlin (.kt) integrados no mesmo projeto Maven/Gradle do Spring Boot, aproveitando recursos como imutabilidade, construtores primários e interpolação de strings lado a lado com o Java.
 
 ### Task 04: Resiliência em Sistemas Distribuídos e Segurança (LGPD).
 Aplica programação reativa, resiliência (Resilience4j) e criptografia de dados (LGPD) totalmente em Kotlin.
@@ -321,3 +333,26 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 (Leitura) Circuit Breaker com Fallback síncrono (Cache/Valores Padrão). A mensageria não se aplica porque viola a necessidade de resposta em tempo real (síncrona) do usuário.
 
 🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
+
+# 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista) - TQI
+
+## 🧩 1. Princípios de Design & Arquitetura (O Coração do Código)
+* [ ] **S - Responsabilidade Única (SRP):** Uma classe deve ter apenas um motivo para mudar. (Ex: Isolar o `NotificadorService` do `CheckoutService`).
+* [ ] **O - Aberto/Fechado (OCP):** O sistema deve ser aberto para novas extensões (regras de negócio) e fechado para alterações. (Uso de *Strategy Pattern* para criar novas formas de pagamento sem quebrar as antigas).
+* [ ] **L - Substituição de Liskov (LSP):** As classes filhas devem poder substituir as classes pai sem quebrar o sistema ou lançar exceções inesperadas.
+* [ ] **I - Segregação de Interfaces (ISP):** É melhor criar interfaces específicas (como `Estornavel`) em vez de interfaces monstros que forçam as classes a implementarem métodos vazios/inúteis.
+* [ ] **D - Inversão de Dependência (DIP):** O core de negócio deve depender de interfaces (abstrações) e não de implementações concretas, permitindo que o Spring injete as peças.
+* [ ] **Arquitetura Hexagonal (Ports & Adapters):** Isolamento total do domínio de negócio (core) contra agentes e tecnologias externas (como banco de dados, brokers de mensageria ou APIs de IA).
+
+## 🔄 2. Mensageria, Resiliência & Concorrência (Sistemas de Missão Crítica)
+* [ ] **Garantia de Processamento na Fila:** O broker (Kafka/RabbitMQ) só remove a mensagem após o processamento com sucesso e o envio do *Acknowledgment* (ACK) manual pela aplicação.
+* [ ] **Idempotência vs. Chave Única:** Idempotência é o objetivo de não duplicar transações. A Chave Única (`UNIQUE CONSTRAINT` no banco SQL) é o mecanismo atômico definitivo para travar concorrências no mesmo milissegundo.
+* [ ] **Circuit Breaker (Disjuntor):** Padrão que "abre o disjuntor" para isolar uma API de terceiro que está instável ou lenta, respondendo imediatamente com um fallback para proteger a saúde da sua aplicação.
+* [ ] **Virtual Threads (Java 21) / Kotlin Coroutines:** Uso de threads virtuais e leves para lidar com alta concorrência (TPS elevado) de forma assíncrona, escalando o sistema sem estourar a memória do servidor.
+
+## 📊 3. Observabilidade, Banco de Dados & Performance
+* [ ] **Os 3 Pilares da Observabilidade:** * *Métricas:* Saúde e performance do servidor (Prometheus/Grafana).
+    * *Logs Estruturados:* Logs em formato JSON contendo o contexto completo do erro.
+    * *Distributed Tracing:* Rastreamento ponta a ponta da requisição entre microsserviços via `Trace ID` (OpenTelemetry/Jaeger).
+* [ ] **Estratégia de Cache (Redis):** Armazenamento em memória de dados muito lidos e pouco alterados para aliviar o banco relacional.
+* [ ] **Read/Write Splitting:** Arquitetura de banco de dados com uma instância Master dedicada a escritas/alterações e réplicas Slaves focadas apenas em leituras pesadas e relatórios.1
