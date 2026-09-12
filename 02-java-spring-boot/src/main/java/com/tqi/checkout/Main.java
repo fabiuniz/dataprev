@@ -1,5 +1,5 @@
 //@file:JvmName("Application")
-package com.tqi.checkout;
+package com.dprev.checkout;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

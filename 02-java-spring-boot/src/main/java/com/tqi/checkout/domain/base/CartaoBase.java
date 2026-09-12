@@ -1,6 +1,6 @@
-package com.tqi.checkout.domain.base;
+package com.dprev.checkout.domain.base;
 
-import com.tqi.checkout.domain.MetodoPagamento;
+import com.dprev.checkout.domain.MetodoPagamento;
 
 // HIERARQUIA DE CLASSES (Equivalente ao 'extends' do Java): herda de 'ObjetoAuditavel' para reaproveitar logs de segurança.
 // [🟨L] - LISKOV SUBSTITUTION PRINCIPLE: Garante um contrato estável para que qualquer subclasse 

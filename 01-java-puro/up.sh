@@ -7,7 +7,7 @@ clear
 echo "🧹 Parando todos os containers Docker da máquina..."
 docker stop $(docker ps -q) 2>/dev/null || true
 echo "🧹 Encerrando instâncias antigas da aplicação..."
-pkill -f com.tqi.checkout.Main 2>/dev/null || true
+pkill -f com.dprev.checkout.Main 2>/dev/null || true
 # =====================================================================
 # 1. Configurações e Variáveis
 # =====================================================================
@@ -126,7 +126,7 @@ javac -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" -d bin @fontes_t
 rm fontes_test.txt
 
 echo "📦 Empacotando tudo em JAR Executável..."
-jar cfe $FOLDER_JAR/checkout-solid.jar com.tqi.checkout.Main -C bin . || exit 1
+jar cfe $FOLDER_JAR/checkout-solid.jar com.dprev.checkout.Main -C bin . || exit 1
 
 # =====================================================================
 # 4. Validação de Prontidão dos Serviços Externalizados
@@ -150,14 +150,14 @@ echo "📦 Fila 'fila-notificacao-checkout' provisionada com sucesso no LocalSta
 # 5. Execução do Ecossistema (Unificado e Corrigido)
 # =====================================================================
 echo "🏃 Executando a aplicação nativa híbrida (Main)..."
-java -cp "$FOLDER_JAR/checkout-solid.jar:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" com.tqi.checkout.Main &
+java -cp "$FOLDER_JAR/checkout-solid.jar:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" com.dprev.checkout.Main &
 MAIN_PID=$!
 
 # Pequena pausa para o WebServer interno iniciar
 sleep 2
 
 echo "🧪 Executando Testes de Integração (CheckoutSOLIDTest)..."
-java -cp "$FOLDER_JAR/checkout-solid.jar:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" com.tqi.checkout.test.CheckoutSOLIDTest
+java -cp "$FOLDER_JAR/checkout-solid.jar:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" com.dprev.checkout.test.CheckoutSOLIDTest
 
 # Mantém o processo principal visível
 wait $MAIN_PID

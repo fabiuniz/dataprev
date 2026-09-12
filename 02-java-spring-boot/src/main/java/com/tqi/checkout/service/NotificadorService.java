@@ -1,4 +1,4 @@
-package com.tqi.checkout.service;
+package com.dprev.checkout.service;
 
 // [🟥S] - SINGLE RESPONSIBILITY PRINCIPLE: Esta classe serve APENAS para gerenciar o canal de notificações.
 public class NotificadorService {

@@ -1,4 +1,4 @@
-package com.tqi.checkout.service;
+package com.dprev.checkout.service;
 
 import org.springframework.stereotype.Service;
 // [🟥S] - SINGLE RESPONSIBILITY PRINCIPLE: Sua única razão para mudar é a regra de envio específica do canal de E-mails.

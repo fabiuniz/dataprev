@@ -1,6 +1,6 @@
-package com.tqi.checkout.service;
+package com.dprev.checkout.service;
 
-import com.tqi.checkout.domain.MetodoPagamento;
+import com.dprev.checkout.domain.MetodoPagamento;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

@@ -12,7 +12,7 @@ docker stop $(docker ps -aq) 2>/dev/null || true
 echo "🗑️ Removendo containers antigos para evitar conflitos..."
 docker rm $(docker ps -aq) 2>/dev/null || true
 echo "🧹 Encerrando instâncias antigas da aplicação..."
-pkill -f com.tqi.checkout.Main 2>/dev/null || true
+pkill -f com.dprev.checkout.Main 2>/dev/null || true
 
 # =====================================================================
 # 1. Configurações e Variáveis de Infraestrutura

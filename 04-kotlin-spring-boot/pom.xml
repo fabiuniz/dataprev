@@ -9,7 +9,7 @@
         <version>3.2.5</version>
         <relativePath/>
     </parent>
-    <groupId>com.tqi</groupId>
+    <groupId>com.dprev</groupId>
     <artifactId>checkout</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>checkout-solid-spring</name>
@@ -110,7 +110,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.tqi.checkout.MainKt</mainClass>
+                    <mainClass>com.dprev.checkout.MainKt</mainClass>
                 </configuration>
             </plugin>
         </plugins>

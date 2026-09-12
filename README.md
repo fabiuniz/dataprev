@@ -48,7 +48,7 @@ solid_hybrid/
 └── 06-kafka-event-driven/         # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
     ├── docker-compose.yml         # Subida local do Apache Kafka e Zookeeper
     ├── pom.xml                    # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
-    ├── src/main/java/com/tqi/checkout/
+    ├── src/main/java/com/dprev/checkout/
     │   ├── config/                # Configuração de beans e serialização de mensagens
     │   ├── event/                 # Payloads de eventos de domínio (CheckoutRealizadoEvent)
     │   ├── producer/              # Produtores responsáveis pelo disparo de eventos assíncronos
@@ -205,7 +205,7 @@ public class AnalisadorFraudeIA {
  - [x] API Gateway
 ## 📐 Arquitetura, Design e Modelagem (Hardskills Conceituais)
  - [x] Arquitetura de Microsserviços
- - Arquitetura Hexagonal
+ - [x] Arquitetura Hexagonal
  - [x] Orquestração de Serviços
  - [x] Transações Distribuídas (⚛️ Atomicidade)
  - [x] Arquitetura e Linguagem Orientada a Objetos
@@ -336,7 +336,7 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 
 🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
 
-# 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista) - TQI
+# 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista) - dprev
 
 ## 🧩 1. Princípios de Design & Arquitetura (O Coração do Código)
 - [ ] **S - Responsabilidade Única (SRP):** Uma classe deve ter apenas um motivo para mudar. (Ex: Isolar o `NotificadorService` do `CheckoutService`).

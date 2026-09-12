@@ -1,11 +1,11 @@
-package com.tqi.checkout;
+package com.dprev.checkout;
 
-import com.tqi.checkout.domain.strategy.PixPagamento;
-import com.tqi.checkout.domain.strategy.CartaoCreditoPagamento;
-import com.tqi.checkout.domain.strategy.BoletoPagamento;
-import com.tqi.checkout.domain.strategy.ValeRefeicaoPagamento;
-import com.tqi.checkout.domain.cascade.CartaoCorporativoPremium;
-import com.tqi.checkout.service.CheckoutService;
+import com.dprev.checkout.domain.strategy.PixPagamento;
+import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
+import com.dprev.checkout.domain.strategy.BoletoPagamento;
+import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
+import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium;
+import com.dprev.checkout.service.CheckoutService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ public class RunnerEstudos implements CommandLineRunner {
         checkout.finalizarPedido(50.0, shadowBoleto, "fabiano@email.com");
 
         System.out.println("=== TESTANDO CONCEITOS DE CASCATA (EXTENDS & IMPLEMENTS) ===");
-        checkout.finalizarPedido(5000.0, cartaoCorp, "diretoria@tqi.com");
+        checkout.finalizarPedido(5000.0, cartaoCorp, "diretoria@dprev.com");
 
         System.out.println("Verificando rastreabilidade do cartão corporativo:");
         cartaoCorp.generateLogAuditoria(5000.0);
