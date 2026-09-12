@@ -99,16 +99,16 @@ Aplica programação reativa, resiliência (Resilience4j) e criptografia de dado
 Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead do Spring.
 * **O que desenvolver**: Criar um processador de lote (batch) de concorrência massiva para simular a fila de processamentos da Dataprev.
 * **Tópicos Críticos do Edital**:
-    - [ ]Diferença conceitual entre o modelo tradicional de Threads do Java (OS Threads) e as *Lightweight Threads* do Kotlin (Coroutines).
-    - [ ]Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
-    - [ ]Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
+    - [ ] Diferença conceitual entre o modelo tradicional de Threads do Java (OS Threads) e as *Lightweight Threads* do Kotlin (Coroutines).
+    - [ ] Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
+    - [ ] Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
 
 ### 📨Task 06: Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
 Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Apache Kafka, consolidando a automação de qualidade e entrega contínua em pipeline.
 * **O que desenvolver**: Implementar mensageria com Spring Kafka e configurar a esteira de integração contínua (CI) validando a cobertura de código automaticamente.
 * **Tópicos Críticos do Edital**:
-    - [ ]Mensageria Distribuída: Conceitos de tópicos, partições, consumer groups e offsets no Apache Kafka.
-    - [ ]DevSecOps e Pipelines CI/CD: Automação de builds em containers, execução de testes unitários/integrados e aplicação do plugin JaCoCo como Quality Gate obrigatório antes do deploy.
+    - [ ] Mensageria Distribuída: Conceitos de tópicos, partições, consumer groups e offsets no Apache Kafka.
+    - [ ] DevSecOps e Pipelines CI/CD: Automação de builds em containers, execução de testes unitários/integrados e aplicação do plugin JaCoCo como Quality Gate obrigatório antes do deploy.
      
 ---
 
