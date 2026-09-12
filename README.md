@@ -63,52 +63,52 @@ solid_hybrid/
 ### 🧱Task 01: Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
 * **Tópicos Críticos do Edital**:
-    * [x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
-    * [x] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
-    * [x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
-    * [x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
+    - [x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
+    - [x] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
+    - [x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
+    - [x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
 ### ⚙️Task 02: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, e integrando a mensageria da AWS SQS via Spring Cloud AWS.
 * **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
-    * [x] Inversão de Controle (IoC) & Beans: A instanciação manual (new) foi completamente eliminada das regras de negócio e substituída por injeção via construtor com anotações do Spring (@Component, @Service, @Repository).
-    * [x] Escopos de Beans: Validação de que o ciclo de vida dos componentes obedece ao padrão do container (Singleton por padrão, e entendimento prático de @Scope("prototype") quando necessário).
-    * [x] Controle Transacional (@Transactional): O serviço de checkout gerencia transações com segurança, garantindo rollback automático em caso de exceções (rollbackFor = Exception.class).
-    * [x] Análise de Propagação: Compreensão prática e teste dos comportamentos entre Propagation.REQUIRED (padrão) e Propagation.REQUIRES_NEW.
-    * [x] Persistência Relacional: Conexão bem-sucedida com o PostgreSQL, mapeamento de entidades via JPA/Hibernate e tratamento de constraints de unicidade (como a chave de idempotência).
+    - [x] Inversão de Controle (IoC) & Beans: A instanciação manual (new) foi completamente eliminada das regras de negócio e substituída por injeção via construtor com anotações do Spring (@Component, @Service, @Repository).
+    - [x] Escopos de Beans: Validação de que o ciclo de vida dos componentes obedece ao padrão do container (Singleton por padrão, e entendimento prático de @Scope("prototype") quando necessário).
+    - [x] Controle Transacional (@Transactional): O serviço de checkout gerencia transações com segurança, garantindo rollback automático em caso de exceções (rollbackFor = Exception.class).
+    - [x] Análise de Propagação: Compreensão prática e teste dos comportamentos entre Propagation.REQUIRED (padrão) e Propagation.REQUIRES_NEW.
+    - [x] Persistência Relacional: Conexão bem-sucedida com o PostgreSQL, mapeamento de entidades via JPA/Hibernate e tratamento de constraints de unicidade (como a chave de idempotência).
 
 ### 🔄Task 03: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
 * **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
-    * [ ] Infraestrutura de Nuvem Local: Subida e validação automatizada dos containers de suporte (PostgreSQL, Redis para cache/lock distribuído, e LocalStack para SQS).
-    * [ ] Spring Cloud AWS (SqsTemplate): O serviço produtor envia com sucesso mensagens de comprovante de pagamento para a fila SQS no LocalStack (localhost:4566).
-    * [ ] Consumo Assíncrono (@SqsListener): Implementação do listener no Spring Boot capaz de capturar e processar as mensagens da fila de forma assíncrona.
-    * [ ] Resiliência & Fail-Open: Mecanismo defensivo testado onde falhas no Redis ou no SQS não derrubam a requisição principal do cliente (degradação graciosa).
-    * [ ] Interoperabilidade Java + Kotlin: Introdução de arquivos Kotlin (.kt) integrados no mesmo projeto Maven/Gradle do Spring Boot, aproveitando recursos como imutabilidade, construtores primários e interpolação de strings lado a lado com o Java.
+    - [ ] Infraestrutura de Nuvem Local: Subida e validação automatizada dos containers de suporte (PostgreSQL, Redis para cache/lock distribuído, e LocalStack para SQS).
+    - [ ] Spring Cloud AWS (SqsTemplate): O serviço produtor envia com sucesso mensagens de comprovante de pagamento para a fila SQS no LocalStack (localhost:4566).
+    - [ ] Consumo Assíncrono (@SqsListener): Implementação do listener no Spring Boot capaz de capturar e processar as mensagens da fila de forma assíncrona.
+    - [ ] Resiliência & Fail-Open: Mecanismo defensivo testado onde falhas no Redis ou no SQS não derrubam a requisição principal do cliente (degradação graciosa).
+    - [ ] Interoperabilidade Java + Kotlin: Introdução de arquivos Kotlin (.kt) integrados no mesmo projeto Maven/Gradle do Spring Boot, aproveitando recursos como imutabilidade, construtores primários e interpolação de strings lado a lado com o Java.
 
 ### 🛡️Task 04: Resiliência em Sistemas Distribuídos e Segurança (LGPD).
 Aplica programação reativa, resiliência (Resilience4j) e criptografia de dados (LGPD) totalmente em Kotlin.
 * **O que desenvolver**: Simular falhas em chamadas de rede externas e aplicar criptografia de dados sensíveis.
 * **Tópicos Críticos do Edital**:
-    * [ ] Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
-    * [ ] Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
+    - [ ] Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
+    - [ ] Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
 
 ### ⚡Task 05: Alta Concorrência e Programação Assíncrona.
 Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead do Spring.
 * **O que desenvolver**: Criar um processador de lote (batch) de concorrência massiva para simular a fila de processamentos da Dataprev.
 * **Tópicos Críticos do Edital**:
-    * [ ]Diferença conceitual entre o modelo tradicional de Threads do Java (OS Threads) e as *Lightweight Threads* do Kotlin (Coroutines).
-    * [ ]Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
-    * [ ]Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
+    - [ ]Diferença conceitual entre o modelo tradicional de Threads do Java (OS Threads) e as *Lightweight Threads* do Kotlin (Coroutines).
+    - [ ]Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
+    - [ ]Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
 
 ### 📨Task 06: Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
 Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Apache Kafka, consolidando a automação de qualidade e entrega contínua em pipeline.
 * **O que desenvolver**: Implementar mensageria com Spring Kafka e configurar a esteira de integração contínua (CI) validando a cobertura de código automaticamente.
 * **Tópicos Críticos do Edital**:
-    * [ ]Mensageria Distribuída: Conceitos de tópicos, partições, consumer groups e offsets no Apache Kafka.
-    * [ ]DevSecOps e Pipelines CI/CD: Automação de builds em containers, execução de testes unitários/integrados e aplicação do plugin JaCoCo como Quality Gate obrigatório antes do deploy.
+    - [ ]Mensageria Distribuída: Conceitos de tópicos, partições, consumer groups e offsets no Apache Kafka.
+    - [ ]DevSecOps e Pipelines CI/CD: Automação de builds em containers, execução de testes unitários/integrados e aplicação do plugin JaCoCo como Quality Gate obrigatório antes do deploy.
      
 ---
 
@@ -339,22 +339,22 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 # 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista) - TQI
 
 ## 🧩 1. Princípios de Design & Arquitetura (O Coração do Código)
-* [ ] **S - Responsabilidade Única (SRP):** Uma classe deve ter apenas um motivo para mudar. (Ex: Isolar o `NotificadorService` do `CheckoutService`).
-* [ ] **O - Aberto/Fechado (OCP):** O sistema deve ser aberto para novas extensões (regras de negócio) e fechado para alterações. (Uso de *Strategy Pattern* para criar novas formas de pagamento sem quebrar as antigas).
-* [ ] **L - Substituição de Liskov (LSP):** As classes filhas devem poder substituir as classes pai sem quebrar o sistema ou lançar exceções inesperadas.
-* [ ] **I - Segregação de Interfaces (ISP):** É melhor criar interfaces específicas (como `Estornavel`) em vez de interfaces monstros que forçam as classes a implementarem métodos vazios/inúteis.
-* [ ] **D - Inversão de Dependência (DIP):** O core de negócio deve depender de interfaces (abstrações) e não de implementações concretas, permitindo que o Spring injete as peças.
-* [ ] **Arquitetura Hexagonal (Ports & Adapters):** Isolamento total do domínio de negócio (core) contra agentes e tecnologias externas (como banco de dados, brokers de mensageria ou APIs de IA).
+- [ ] **S - Responsabilidade Única (SRP):** Uma classe deve ter apenas um motivo para mudar. (Ex: Isolar o `NotificadorService` do `CheckoutService`).
+- [ ] **O - Aberto/Fechado (OCP):** O sistema deve ser aberto para novas extensões (regras de negócio) e fechado para alterações. (Uso de *Strategy Pattern* para criar novas formas de pagamento sem quebrar as antigas).
+- [ ] **L - Substituição de Liskov (LSP):** As classes filhas devem poder substituir as classes pai sem quebrar o sistema ou lançar exceções inesperadas.
+- [ ] **I - Segregação de Interfaces (ISP):** É melhor criar interfaces específicas (como `Estornavel`) em vez de interfaces monstros que forçam as classes a implementarem métodos vazios/inúteis.
+- [ ] **D - Inversão de Dependência (DIP):** O core de negócio deve depender de interfaces (abstrações) e não de implementações concretas, permitindo que o Spring injete as peças.
+- [ ] **Arquitetura Hexagonal (Ports & Adapters):** Isolamento total do domínio de negócio (core) contra agentes e tecnologias externas (como banco de dados, brokers de mensageria ou APIs de IA).
 
 ## 🔄 2. Mensageria, Resiliência & Concorrência (Sistemas de Missão Crítica)
-* [ ] **Garantia de Processamento na Fila:** O broker (Kafka/RabbitMQ) só remove a mensagem após o processamento com sucesso e o envio do *Acknowledgment* (ACK) manual pela aplicação.
-* [ ] **Idempotência vs. Chave Única:** Idempotência é o objetivo de não duplicar transações. A Chave Única (`UNIQUE CONSTRAINT` no banco SQL) é o mecanismo atômico definitivo para travar concorrências no mesmo milissegundo.
-* [ ] **Circuit Breaker (Disjuntor):** Padrão que "abre o disjuntor" para isolar uma API de terceiro que está instável ou lenta, respondendo imediatamente com um fallback para proteger a saúde da sua aplicação.
-* [ ] **Virtual Threads (Java 21) / Kotlin Coroutines:** Uso de threads virtuais e leves para lidar com alta concorrência (TPS elevado) de forma assíncrona, escalando o sistema sem estourar a memória do servidor.
+- [ ] **Garantia de Processamento na Fila:** O broker (Kafka/RabbitMQ) só remove a mensagem após o processamento com sucesso e o envio do *Acknowledgment* (ACK) manual pela aplicação.
+- [ ] **Idempotência vs. Chave Única:** Idempotência é o objetivo de não duplicar transações. A Chave Única (`UNIQUE CONSTRAINT` no banco SQL) é o mecanismo atômico definitivo para travar concorrências no mesmo milissegundo.
+- [ ] **Circuit Breaker (Disjuntor):** Padrão que "abre o disjuntor" para isolar uma API de terceiro que está instável ou lenta, respondendo imediatamente com um fallback para proteger a saúde da sua aplicação.
+- [ ] **Virtual Threads (Java 21) / Kotlin Coroutines:** Uso de threads virtuais e leves para lidar com alta concorrência (TPS elevado) de forma assíncrona, escalando o sistema sem estourar a memória do servidor.
 
 ## 📊 3. Observabilidade, Banco de Dados & Performance
-* [ ] **Os 3 Pilares da Observabilidade:** * *Métricas:* Saúde e performance do servidor (Prometheus/Grafana).
+- [ ] **Os 3 Pilares da Observabilidade:** * *Métricas:* Saúde e performance do servidor (Prometheus/Grafana).
     * *Logs Estruturados:* Logs em formato JSON contendo o contexto completo do erro.
     * *Distributed Tracing:* Rastreamento ponta a ponta da requisição entre microsserviços via `Trace ID` (OpenTelemetry/Jaeger).
-* [ ] **Estratégia de Cache (Redis):** Armazenamento em memória de dados muito lidos e pouco alterados para aliviar o banco relacional.
-* [ ] **Read/Write Splitting:** Arquitetura de banco de dados com uma instância Master dedicada a escritas/alterações e réplicas Slaves focadas apenas em leituras pesadas e relatórios.1
+- [ ] **Estratégia de Cache (Redis):** Armazenamento em memória de dados muito lidos e pouco alterados para aliviar o banco relacional.
+- [ ] **Read/Write Splitting:** Arquitetura de banco de dados com uma instância Master dedicada a escritas/alterações e réplicas Slaves focadas apenas em leituras pesadas e relatórios.1
