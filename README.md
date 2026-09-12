@@ -62,10 +62,10 @@ solid_hybrid/
 
 ### Task 01: Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
-* **[x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
-* **[x] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
-* **[x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
-* **[x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
+    * [x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
+    * [x] Infraestrutura**: Dockerização completa do PostgreSQL 15, Redis 7 (com autenticação --requirepass) e LocalStack (AWS SQS) via script automatizado up.sh.
+    * [x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
+    * [x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
 ### Task 02: Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
@@ -91,8 +91,8 @@ Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanc
 Aplica programação reativa, resiliência (Resilience4j) e criptografia de dados (LGPD) totalmente em Kotlin.
 * **O que desenvolver**: Simular falhas em chamadas de rede externas e aplicar criptografia de dados sensíveis.
 * **Tópicos Críticos do Edital**:
-    * **[ ]Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
-    * **[ ]Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
+    * [ ] Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
+    * [ ] Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
 
 ### Task 05: Alta Concorrência e Programação Assíncrona.
 Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead do Spring.
