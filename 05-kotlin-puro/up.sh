@@ -7,27 +7,38 @@ clear
 echo "🧹 Parando todos os containers Docker da máquina..."
 docker stop $(docker ps -q) 2>/dev/null || true
 echo "🧹 Encerrando instâncias antigas da aplicação..."
-pkill -f com.dprev.checkout.MainKt 2>/dev/null || true
+pkill -f com.dprev.checkout.Application 2>/dev/null || true
+fuser -k 8080/tcp 2>/dev/null || true
 
 # =====================================================================
 # 1. Configurações e Variáveis
 # =====================================================================
-PG_CONTAINER="pg-checkout"
-REDIS_CONTAINER="redis-checkout"
-LOCALSTACK_CONTAINER="localstack-checkout"
-
 FOLDER_JAR="../jars"
 mkdir -p "$FOLDER_JAR"
+PG_CONTAINER="pg-checkout"
+REDIS_CONTAINER="redis-checkout"
+REDIS_PASS="SuaSenhaSuperSegura123"
+LOCALSTACK_CONTAINER="localstack-checkout"
+
 DRIVER_JAR="$FOLDER_JAR/postgresql-42.7.3.jar"
 JEDIS_JAR="$FOLDER_JAR/jedis-4.4.3.jar"
 POOL_JAR="$FOLDER_JAR/commons-pool2-2.11.1.jar"
+KOTLIN_STD_JAR="$FOLDER_JAR/kotlin-stdlib.jar"
 AWS_SDK_JAR="$FOLDER_JAR/aws-java-sdk-bundle-1.12.500.jar"
-
-REDIS_PASS="SuaSenhaSuperSegura123"
+JUNIT_API="$FOLDER_JAR/junit-jupiter-api-5.10.2.jar"
+JUNIT_ENGINE="$FOLDER_JAR/junit-jupiter-engine-5.10.2.jar"
+JUNIT_PLATFORM_API="$FOLDER_JAR/junit-platform-commons-1.10.2.jar"
+TOOLS_DIR="$FOLDER_JAR/tools"
+mkdir -p "$TOOLS_DIR"
+KOTLINC_HOME="$TOOLS_DIR/kotlinc"
 
 # =====================================================================
 # 2. Downloads das Dependências (Se não existirem)
 # =====================================================================
+if [ ! -f "$KOTLIN_STD_JAR" ]; then
+    echo "📥 Baixando Kotlin Standard Library..."
+    curl -L -sS -o "$KOTLIN_STD_JAR" https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.22/kotlin-stdlib-1.9.22.jar
+fi
 if [ ! -f "$DRIVER_JAR" ]; then
     echo "📥 Baixando Driver JDBC do PostgreSQL..."
     curl -L -sS -o "$DRIVER_JAR" https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.3/postgresql-42.7.3.jar
@@ -48,9 +59,12 @@ if [ ! -f "$AWS_SDK_JAR" ]; then
     curl -L -sS -o "$AWS_SDK_JAR" https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.500/aws-java-sdk-bundle-1.12.500.jar
 fi
 
-JUNIT_API="$FOLDER_JAR/junit-jupiter-api-5.10.2.jar"
-JUNIT_ENGINE="$FOLDER_JAR/junit-jupiter-engine-5.10.2.jar"
-JUNIT_PLATFORM_API="$FOLDER_JAR/junit-platform-commons-1.10.2.jar"
+if [ ! -f "$KOTLINC_HOME/bin/kotlinc" ]; then
+    echo "📥 Baixando compilador Kotlin 1.9.22..."
+    curl -L -sS -o "$TOOLS_DIR/kotlin-compiler.zip" https://github.com/JetBrains/Kotlin/releases/download/v1.9.22/kotlin-compiler-1.9.22.zip
+    unzip -q "$TOOLS_DIR/kotlin-compiler.zip" -d "$TOOLS_DIR"
+    rm "$TOOLS_DIR/kotlin-compiler.zip"
+fi
 
 if [ ! -f "$JUNIT_API" ]; then
     echo "📥 Baixando JUnit Jupiter API..."
@@ -108,16 +122,16 @@ echo "🚀 Compilando código Kotlin de Produção..."
 rm -rf bin
 mkdir -p bin
 
-# Solução mais limpa da CLI: aponta o diretório raiz e compila recursivamente
-kotlinc -jvm-target 1.8 \
-        -cp "$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" \
-        -d bin \
-        $(find src/main/kotlin -name "*.kt") || { echo "❌ Erro na compilação de produção!"; exit 1; }
+echo "🚀 Compilando código Kotlin com a versão 1.9.22..."
+"$KOTLINC_HOME/bin/kotlinc" -jvm-target 1.8 \
+    -cp "$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR:$KOTLIN_STD_JAR" \
+    -d bin \
+    $(find src/main/kotlin -name "*.kt")
 # =====================================================================
 # 5. Execução do Ecossistema (Aplicação e Testes)
 # =====================================================================
 echo "🏃 Executando a aplicação Kotlin Puro..."
-java -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR" com.dprev.checkout.ApplicationKt &
+java -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR:$KOTLIN_STD_JAR" com.dprev.checkout.Application &
 MAIN_PID=$!
 
 # Aguarda o servidor subir de fato
@@ -125,7 +139,7 @@ sleep 2
 
 echo "🧪 Compilando e Executando Testes de Integração em Kotlin..."
 find src/test/kotlin -name "*.kt" > fontes_test.txt
-kotlinc -jvm-target 1.8 -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR:$JUNIT_API:$JUNIT_PLATFORM_API" -d bin @fontes_test.txt || exit 1
+"$KOTLINC_HOME/bin/kotlinc" -jvm-target 1.8 -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR:$JUNIT_API:$JUNIT_PLATFORM_API" -d bin @fontes_test.txt || exit 1
 rm fontes_test.txt
 
 java -cp "bin:.:$DRIVER_JAR:$JEDIS_JAR:$POOL_JAR:$AWS_SDK_JAR:$JUNIT_API:$JUNIT_PLATFORM_API" com.dprev.checkout.CheckoutSOLIDTestKt 2>/dev/null || echo "✅ Testes executados via infraestrutura."
