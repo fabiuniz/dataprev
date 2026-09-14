@@ -6,9 +6,9 @@ package com.dprev.checkout.service
 // O Kotlin utiliza 'String Interpolation' nativa ($email, $valor) eliminando a concatenação manual com '+'.
 //@Service
 public class EmailNotificadorService : Notificador {
-    public override fun enviarComprovante(email: String, valor: Double) {
+    public override fun enviarComprovante(destino: String, valor: Double) {
         // KOTLIN REVOLUTION: String Interpolation nativa ($email, $valor).
-        // Chega de concatenações confusas de strings com o operador '+'.
+        val email = destino // <--- Aqui pegamos o argumento 'destino' que veio da interface
         println("E-mail enviado para $email confirmando os R$ $valor")
     }
 }

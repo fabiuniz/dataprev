@@ -2,16 +2,18 @@
 
 package com.dprev.checkout
 
+import com.dprev.checkout.service.WebServer
 import com.dprev.checkout.service.CheckoutService
 import com.dprev.checkout.service.EmailNotificadorService
 import com.dprev.checkout.domain.strategy.*
 import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium
 
 fun main() {
-    // 1. Instancia manualmente as dependências de infraestrutura
-    val notificador = EmailNotificadorService()
+    // 1. Sobe o servidor HTTP nativo na porta 8080 permitindo conexões externas
+    WebServer.iniciar(8080)
 
-    // 2. Injeta o notificador no serviço de checkout (Injeção manual)
+    // 2. Instancia manualmente as dependências de infraestrutura
+    val notificador = EmailNotificadorService()
     val checkoutService = CheckoutService(notificador)
 
     // 3. Instancia as estratégias de pagamento

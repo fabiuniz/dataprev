@@ -45,22 +45,22 @@ solid_hybrid/
 ├── 05-kotlin-puro/                 # 🎯 Foco FGV: Alta Concorrência, Threads vs Coroutines
 │   ├── src/main/kotlin/...         # Estruturas puras de Kotlin, Suspend Functions e Channels
 │   └── up.sh                       # Inicialização do ecossistema
-└── 06-kafka-event-driven/         # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
-    ├── docker-compose.yml         # Subida local do Apache Kafka e Zookeeper
-    ├── pom.xml                    # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
-    ├── src/main/java/com/dprev/checkout/
-    │   ├── config/                # Configuração de beans e serialização de mensagens
-    │   ├── event/                 # Payloads de eventos de domínio (CheckoutRealizadoEvent)
-    │   ├── producer/              # Produtores responsáveis pelo disparo de eventos assíncronos
-    │   └── consumer/              # Listeners assíncronos para processamento de notificações
-    ├── src/test/java/...          # Testes integrados e relatório de cobertura JaCoCo
-    └── up.sh                      # Script de inicialização do cluster de mensageria e app
+└── 06-kafka-event-driven/          # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
+    ├── docker-compose.yml          # Subida local do Apache Kafka e Zookeeper
+    ├── pom.xml                     # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
+    ├── src/m./j./c./d./checkout/   # Core em Java 21
+    │   ├── config/                 # Configuração de beans e serialização de mensagens
+    │   ├── event/                  # Payloads de eventos de domínio (CheckoutRealizadoEvent)
+    │   ├── producer/               # Produtores responsáveis pelo disparo de eventos assíncronos
+    │   └── consumer/               # Listeners assíncronos para processamento de notificações
+    ├── src/test/java/...           # Testes integrados e relatório de cobertura JaCoCo
+    └── up.sh                       # Script de inicialização do cluster de mensageria e app
 ```
     ---
 
 ## 📅 Cronograma Prático de Evolução (Foco na Prova Objetiva)
 
-### 🧱Task 01 (01-java-puro): Fundações, Infraestrutura e Padrões de Criação.
+### 🧱Lab 01 (01-java-puro): Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
 * **Tópicos Críticos do Edital**:
     - [x] Implementado**: Padrões Strategy (Mapeamento de meios de pagamento) e Decorator (Camada de idempotência real interceptando a requisição).
@@ -68,9 +68,9 @@ Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manua
     - [x] Mensageria Inicial**: Provisionamento programático de fila de notificação (fila-notificacao-checkout) utilizando o SDK oficial da AWS em Java puro.
     - [x] Revisão Teórica FGV**: Garantir o entendimento do acrônimo SOLID, especificamente o Liskov Substitution Principle (LSP) (Estudo de caso da quebra de limite do VR) e níveis de isolamento transacional via JDBC.
  
-### ⚙️Task 02 (java-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+### ⚙️Lab 02 (java-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, e integrando a mensageria da AWS SQS via Spring Cloud AWS.
-* **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
+* **O que desenvolver**: Migrar o código Java puro do Lab 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
     - [x] Inversão de Controle (IoC) & Beans: A instanciação manual (new) foi completamente eliminada das regras de negócio e substituída por injeção via construtor com anotações do Spring (@Component, @Service, @Repository).
     - [x] Escopos de Beans: Validação de que o ciclo de vida dos componentes obedece ao padrão do container (Singleton por padrão, e entendimento prático de @Scope("prototype") quando necessário).
@@ -78,9 +78,9 @@ Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanc
     - [x] Análise de Propagação: Compreensão prática e teste dos comportamentos entre Propagation.REQUIRED (padrão) e Propagation.REQUIRES_NEW.
     - [x] Persistência Relacional: Conexão bem-sucedida com o PostgreSQL, mapeamento de entidades via JPA/Hibernate e tratamento de constraints de unicidade (como a chave de idempotência).
 
-### 🔄Task 03 (java-kotlin-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
+### 🔄Lab 03 (java-kotlin-spring-boot): Injeção de Dependências, Padrões Estruturais e Integração Cloud.
 Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanciação manual por Inversão de Controle (IoC) e Beans, integrando a mensageria da AWS SQS via Spring Cloud AWS e demonstrando a interoperabilidade com Kotlin.
-* **O que desenvolver**: Migrar o código Java puro do Task 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
+* **O que desenvolver**: Migrar o código Java puro do Lab 01 para Beans gerenciados do Spring, conectando o produtor e consumidor ao LocalStack (SQS) através do ecossistema Spring Cloud.
 * **Tópicos Críticos do Edital**:
     - [ ] Infraestrutura de Nuvem Local: Subida e validação automatizada dos containers de suporte (PostgreSQL, Redis para cache/lock distribuído, e LocalStack para SQS).
     - [ ] Spring Cloud AWS (SqsTemplate): O serviço produtor envia com sucesso mensagens de comprovante de pagamento para a fila SQS no LocalStack (localhost:4566).
@@ -88,14 +88,14 @@ Evolui o mesmo domínio para utilizar o Spring Framework, substituindo a instanc
     - [ ] Resiliência & Fail-Open: Mecanismo defensivo testado onde falhas no Redis ou no SQS não derrubam a requisição principal do cliente (degradação graciosa).
     - [ ] Interoperabilidade Java + Kotlin: Introdução de arquivos Kotlin (.kt) integrados no mesmo projeto Maven/Gradle do Spring Boot, aproveitando recursos como imutabilidade, construtores primários e interpolação de strings lado a lado com o Java.
 
-### 🛡️Task 04 (kotlin-spring-boot): Resiliência em Sistemas Distribuídos e Segurança (LGPD).
+### 🛡️Lab 04 (kotlin-spring-boot): Resiliência em Sistemas Distribuídos e Segurança (LGPD).
 Aplica programação reativa, resiliência (Resilience4j) e criptografia de dados (LGPD) totalmente em Kotlin.
 * **O que desenvolver**: Simular falhas em chamadas de rede externas e aplicar criptografia de dados sensíveis.
 * **Tópicos Críticos do Edital**:
     - [ ] Tolerância a Falhas**: Implementação prática de um *Circuit Breaker* (Estados: Open, Closed, Half-Open) e políticas de *Retry com Exponential Backoff* usando Resilience4j.
     - [ ] Conformidade LGPD**: Implementar um `AttributeConverter` no JPA para interceptar o CPF e dados de cartão do cliente, aplicando criptografia simétrica AES-256 antes de salvar no banco de dados (Conceito de *Privacy by Design*).
 
-### ⚡Task 05 (kotlin-puro): Alta Concorrência e Programação Assíncrona.
+### ⚡Lab 05 (kotlin-puro): Alta Concorrência e Programação Assíncrona.
 Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead do Spring.
 * **O que desenvolver**: Criar um processador de lote (batch) de concorrência massiva para simular a fila de processamentos da Dataprev.
 * **Tópicos Críticos do Edital**:
@@ -103,7 +103,7 @@ Foca em alta concorrência pura, utilizando Coroutines e canais sem o overhead d
     - [ ] Uso prático de construtores de escopo: `launch` (fogo e esquecimento) vs `async/await` (retorno assíncrono).
     - [ ] Domínio dos Dispatchers: `Dispatchers.IO` para chamadas bloqueantes de banco/Redis e `Dispatchers.Default` para processamento intensivo de CPU.
 
-### 📨Task 06 (kafka-event-driven): Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
+### 📨Lab 06 (kafka-event-driven): Arquitetura Orientada a Eventos (Kafka), CI/CD e Governança de Qualidade.
 Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Apache Kafka, consolidando a automação de qualidade e entrega contínua em pipeline.
 * **O que desenvolver**: Implementar mensageria com Spring Kafka e configurar a esteira de integração contínua (CI) validando a cobertura de código automaticamente.
 * **Tópicos Críticos do Edital**:
@@ -344,7 +344,7 @@ sequenceDiagram
 - [x] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
 - [x] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
 - [x] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
-- [x] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Task 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
+- [x] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Lab 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
 
 ❌ Falta aprender:
 - [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
