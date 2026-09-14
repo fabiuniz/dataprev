@@ -26,35 +26,37 @@ O projeto simula um ecossistema de **Checkout de Missão Crítica** evoluindo do
 
 solid_hybrid/
 │
-├── 01-java-puro/                   # 🎯 Foco FGV: SOLID, Design Patterns, JDBC Cru e Cache In-Memory
-│   ├── bin/                        # Binários compilados nativamente
-│   ├── src/main/java/...           # Core em Java 21
-│   └── up.sh                       # Infra Docker (Postgres + Redis com Senha) e compilação nativa
-├── 02-java-spring-boot/            # 🎯 Foco FGV: Ecossistema Spring, Injeção de Dependência e Beans
-│   ├── pom.xml                     # Gerenciamento de Dependências Maven
-│   ├── src/main/java/...           # Core em Java 21
-│   └── up.sh                       # Inicialização do ecossistema Spring Java
-├── 03-java-kotlin-spring-boot/     # 🎯 Foco FGV: Interoperabilidade e Migração de Sistemas Legados
-│   ├── src/main/java/...           # Core em Java 21
-│   ├── src/main/kotlin/...         # Novas regras de negócio em Kotlin
-│   └── up.sh                       # Inicialização do ecossistema
-├── 04-kotlin-spring-boot/          # 🎯 Foco FGV: APIs Reativas, Resiliência e LGPD Bancária
-│   ├── src/main/java/...           # Core em Java 21
-│   ├── src/main/resources/         # Configurações de propriedades e segurança
-│   └── up.sh                       # Inicialização do ecossistema
-├── 05-kotlin-puro/                 # 🎯 Foco FGV: Alta Concorrência, Threads vs Coroutines
-│   ├── src/main/kotlin/...         # Estruturas puras de Kotlin, Suspend Functions e Channels
-│   └── up.sh                       # Inicialização do ecossistema
-└── 06-kafka-event-driven/          # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
-    ├── docker-compose.yml          # Subida local do Apache Kafka e Zookeeper
-    ├── pom.xml                     # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
-    ├── src/m./j./c./d./checkout/   # Core em Java 21
-    │   ├── config/                 # Configuração de beans e serialização de mensagens
-    │   ├── event/                  # Payloads de eventos de domínio (CheckoutRealizadoEvent)
-    │   ├── producer/               # Produtores responsáveis pelo disparo de eventos assíncronos
-    │   └── consumer/               # Listeners assíncronos para processamento de notificações
-    ├── src/test/java/...           # Testes integrados e relatório de cobertura JaCoCo
-    └── up.sh                       # Script de inicialização do cluster de mensageria e app
+├─📁01-java-puro/                  # 🎯 Foco FGV: SOLID, Design Patterns, JDBC Cru e Cache In-Memory
+│   ├─📁 bin/                      # Binários compilados nativamente
+│   ├─📁 src/main/java/...         # Core em Java 21
+│   └─📄 up.sh                     # Infra Docker (Postgres + Redis com Senha) e compilação nativa
+├─📁02-java-spring-boot/           # 🎯 Foco FGV: Ecossistema Spring, Injeção de Dependência e Beans
+│   ├─📁 src/main/java/...         # Core em Java 21
+│   ├─📄 pom.xml                   # Gerenciamento de Dependências Maven
+│   └─📄 up.sh                     # Inicialização do ecossistema Spring Java
+├─📁03-java-kotlin-spring-boot/    # 🎯 Foco FGV: Interoperabilidade e Migração de Sistemas Legados
+│   ├─📁 src/main/java/...         # Core em Java 21
+│   ├─📁 src/main/kotlin/...       # Novas regras de negócio em Kotlin
+│   └─📄 up.sh                     # Inicialização do ecossistema
+├─📁04-kotlin-spring-boot/         # 🎯 Foco FGV: APIs Reativas, Resiliência e LGPD Bancária
+│   ├─📁 src/main/java/...         # Core em Java 21
+│   ├─📁 src/main/resources/       # Configurações de propriedades e segurança
+│   └─📄 up.sh                     # Inicialização do ecossistema
+├─📁05-kotlin-puro/                # 🎯 Foco FGV: Alta Concorrência, Threads vs Coroutines
+│   ├─📁 src/main/kotlin/...       # Estruturas puras de Kotlin, Suspend Functions e Channels
+│   └─📄 up.sh                     # Inicialização do ecossistema
+└─📁06-kafka-event-driven/         # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
+    ├── 📁 .github/workflows/      # Pipeline de CI/CD automatizando testes e Quality Gate
+    ├── 📁 src/main/kotlin/...     # Core em Java 21 / Kotlin estruturado em camadas
+    │   ├─📁 config/               # Configuração de beans, tópicos e serialização de mensagens
+    │   ├─📁 event/                # Payloads de eventos de domínio (CheckoutRealizadoEvent)
+    │   ├─📁 producer/             # Produtores responsáveis pelo disparo de eventos assíncronos
+    │   └─📁 consumer/             # Listeners assíncronos (Consumer Groups) para notificações
+    ├── 📁 src/test/kotlin/...     # Testes integrados (Testcontainers) e relatório JaCoCo
+    ├── 📄 docker-compose.yml      # Subida local do Apache Kafka e Zookeeper
+    ├── 📄 Dockerfile              # Empacotamento containerizado da aplicação
+    ├── 📄 pom.xml                 # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
+    └── 📄 up.sh                   # Script de inicialização do cluster de mensageria e app
 ```
     ---
 
