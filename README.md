@@ -57,10 +57,12 @@ solid_hybrid/
     ├── 📄 Dockerfile              # Empacotamento containerizado da aplicação
     ├── 📄 pom.xml                 # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
     └── 📄 up.sh                   # Script de inicialização do cluster de mensageria e app
+
 ```
+
     ---
 
-## 📅 Cronograma Prático de Evolução (Foco na Prova Objetiva)
+## 📅 Cronograma Prático de Evolução da Aplicação
 
 ### 🧱Lab 01 (01-java-puro): Fundações, Infraestrutura e Padrões de Criação.
 Mantém a estrutura com classes puras, sem frameworks, fazendo a injeção manual com o operador new e JDBC puro.
@@ -114,57 +116,7 @@ Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Ap
      
 ---
 
-## 🧠 Tópicos de Bloco I (Conhecimentos Gerais) Integrados ao Código
-
-Para blindar o Task I da prova (onde é proibido zerar qualquer matéria), os conceitos teóricos serão mapeados em comentários explicativos diretamente nas classes de teste:
-
-1.  **Inteligência Artificial Aplicada (6 Questões)**: Criação de uma classe utilitária `AnalisadorFraudeIA.java` para exercitar de forma comentada as diferenças entre *IA Preditiva* (Árvores de decisão/Regressões) e *IA Generativa* (Modelos de Linguagem e LLMs).
-2.  **Segurança da Informação e LGPD (5 Questões)**: Logs de auditoria imutáveis simulando o rastreamento de *quem* acessou ou modificou dados pessoais sensíveis do cidadão (princípio da transparência e prestação de contas da LGPD).
-
----
-
-## 🛠️ Comandos Globais de Sobrevivência do Laboratório
-
-Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
-
-* **Subir Ambiente e Compilar**:
-    ```bash
-    . up.sh
-    ```
-* **Limpar Docker e Resíduos de Build**:
-    ```bash
-    . reset.sh
-    ```
-
-> ⚠️ **Aviso de Edital**: Use este laboratório para sanar dúvidas de comportamento de código e revise os logs gerados na tela para validar os teoremas da banca.
-> 
-> estou usando as diversas combinações das linguagens para me ajudar com gatilhos mentais em assimilar as razões porque as coisas são assim nesse ecosistema!
-> 
-> 
-```bash
-
-/**
- * 🧠 GATILHO DE MEMÓRIA — BLOCO I (IA APLICADA) | QUESTÃO 21 (SIMULADO FGV)
- * 
- * [CONTEXTO DA BANCA - FGV]: 
- * Distinção fundamental cobrada em provas de TI para órgãos públicos:
- * 1. Sistemas Especialistas / Árvores de Decisão Heurísticas: Baseados em regras 
- *    explícitas "if-then", determinísticos e sem aprendizado estatístico autônomo.
- * 2. Machine Learning / IA Preditiva: Foco em classificação, regressão e score de 
- *    risco baseados em dados históricos estruturados.
- * 3. IA Generativa (LLMs): Foco em modelos probabilísticos de distribuição de 
- *    tokens textuais para geração de conteúdo e linguagem natural.
- */
-const FGV_AI_DECISION_HEURISTIC = Object.freeze({
-    type: 'Heuristic Decision Tree',
-    deterministic: true,
-    targetConcept: 'Rule-based vs Statistical Probability',
-    examBoard: 'FGV'
-});
-```
-    ---
-
-## 💻 Linguagens de Programação e Tecnologias Core já adquiridos nesse programa de treinamento:
+## 💻 Linguagens e Tecnologias adquiridas nesse programa de treinamento:
  - [x] Java (versão 6 ou superior)
  - [x] Javascript
  - [x] HTML
@@ -184,7 +136,7 @@ const FGV_AI_DECISION_HEURISTIC = Object.freeze({
  - [ ] Angular
  - [ ] React
  - [x] SPA (Single Page Application)
- - PWA (Progressive Web App)
+ - [ ] PWA (Progressive Web App)
 ## 📱 Mobile, Automatização e Ferramentas Modernas
  - [ ] Android
  - [ ] iOS
@@ -387,6 +339,58 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 ## 🚀 Comando de Limpeza (Obrigatório antes de virar a chave)
 Sempre limpe os resíduos de compilação da linguagem anterior antes de testar o build da outra:
 mvn clean compile
+
+---
+
+## 🧠 Tópicos de Bloco I (Conhecimentos Gerais) Integrados ao Código
+
+Para blindar o Task I da prova (onde é proibido zerar qualquer matéria), os conceitos teóricos serão mapeados em comentários explicativos diretamente nas classes de teste:
+
+1.  **Inteligência Artificial Aplicada (6 Questões)**: Criação de uma classe utilitária `AnalisadorFraudeIA.java` para exercitar de forma comentada as diferenças entre *IA Preditiva* (Árvores de decisão/Regressões) e *IA Generativa* (Modelos de Linguagem e LLMs).
+2.  **Segurança da Informação e LGPD (5 Questões)**: Logs de auditoria imutáveis simulando o rastreamento de *quem* acessou ou modificou dados pessoais sensíveis do cidadão (princípio da transparência e prestação de contas da LGPD).
+
+---
+
+## 🛠️ Comandos Globais de Sobrevivência do Laboratório
+
+Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
+
+* **Subir Ambiente e Compilar**:
+    ```bash
+    . up.sh
+    ```
+* **Limpar Docker e Resíduos de Build**:
+    ```bash
+    . reset.sh
+    ```
+
+> ⚠️ **Aviso de Edital**: Use este laboratório para sanar dúvidas de comportamento de código e revise os logs gerados na tela para validar os teoremas da banca.
+> 
+> estou usando as diversas combinações das linguagens para me ajudar com gatilhos mentais em assimilar as razões porque as coisas são assim nesse ecosistema!
+> 
+> 
+```bash
+
+    /**
+     * 🧠 GATILHO DE MEMÓRIA — BLOCO I (IA APLICADA) | QUESTÃO 21 (SIMULADO FGV)
+     * 
+     * [CONTEXTO DA BANCA - FGV]: 
+     * Distinção fundamental cobrada em provas de TI para órgãos públicos:
+     * 1. Sistemas Especialistas / Árvores de Decisão Heurísticas: Baseados em regras 
+     *    explícitas "if-then", determinísticos e sem aprendizado estatístico autônomo.
+     * 2. Machine Learning / IA Preditiva: Foco em classificação, regressão e score de 
+     *    risco baseados em dados históricos estruturados.
+     * 3. IA Generativa (LLMs): Foco em modelos probabilísticos de distribuição de 
+     *    tokens textuais para geração de conteúdo e linguagem natural.
+     */
+    const FGV_AI_DECISION_HEURISTIC = Object.freeze({
+        type: 'Heuristic Decision Tree',
+        deterministic: true,
+        targetConcept: 'Rule-based vs Statistical Probability',
+        examBoard: 'FGV'
+    });
+
+```
 
 
 <!--
