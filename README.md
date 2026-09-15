@@ -193,7 +193,7 @@ Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Ap
  - [ ] Inteligência Artificial (Conceitos)
  - [ ] Análise de Dados
  - [ ] Big Data
-## 🧠 Menssageria
+## 📨 Menssageria
  - [ ] Apache Kafka (Producer, Consumer e Event-Driven Architecture)
  - [ ] JaCoCo (Code Coverage e Quality Gates)
  
@@ -259,7 +259,7 @@ sequenceDiagram
     end
 ```
 
-# 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista) - dprev
+# 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista)
 
 ## 🧩 1. Princípios de Design & Arquitetura (O Coração do Código)
 - [ ] **S - Responsabilidade Única (SRP):** Uma classe deve ter apenas um motivo para mudar. (Ex: Isolar o `NotificadorService` do `CheckoutService`).
@@ -282,67 +282,33 @@ sequenceDiagram
 - [ ] **Estratégia de Cache (Redis):** Armazenamento em memória de dados muito lidos e pouco alterados para aliviar o banco relacional.
 - [ ] **Read/Write Splitting:** Arquitetura de banco de dados com uma instância Master dedicada a escritas/alterações e réplicas Slaves focadas apenas em leituras pesadas e relatórios.1
 
-## 📋 Anotações gerais
+## 📋 CHECKLIST DEFINITIVO: INTEROPERABILIDADE JAVA / KOTLIN / SPRING
 
-🧱 Basicamente, o que ja possuo um Sistema transacional que:
-- [x] 🌐 Recebe uma requisição da web─> [ WebServer.java / index.html ]
-- [x] ⚡ Trata a concorrência e duplicidade em cache ──> [ PagamentoIdempotenteRedisRepository.java ]
-- [x] 💾 Persiste em banco SQL ─> [ PagamentoPostgresRepository.java ]
-- [x] 📨 Notifica o cliente final ─> [ EmailNotificadorService.java ]
-- [x] 🧪 Faz testes unitários ──> [ CheckoutSOLIDTest.java ]
-- [x] 🧩 Aplica polimorfismo e padrões SOLID no domínio ──> [ domain/MetodoPagamento.java / Switch Executions ]
-- [x] ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
-
-🧠Você aprendeu que:
-- [x] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
-- [x] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
-- [x] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
-- [x] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
-- [x] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Lab 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
-
-❌ Falta aprender:
-- [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
-- [ ] Camada de Concorrência SQL: Adicionar uma coluna chave_idempotencia VARCHAR UNIQUE na tabela tb_pagamentos.
-- [ ] Gerenciamento de Threads: Setar um ThreadPoolExecutor no WebServer.
-- [ ] Limpeza de Trava: Excluir a chave do Redis caso o bloco do Postgres lance uma exceção, liberando o cliente para tentar novamente.
-- [ ] Rest e RestFull
-
-🤔Spring = "transforma em objetos" = Inversão de Controle (IoC) = new = fabricar = orientado objeto
-new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
-
-🤔mensageria -> pode resolver depois / Cirtuit Break -> tem que resolver na hora fallback
-(Escrita) Circuit Breaker com Fallback assíncrono (Mensageria/Filas) para garantir a consistência eventual.
-(Leitura) Circuit Breaker com Fallback síncrono (Cache/Valores Padrão). A mensageria não se aplica porque viola a necessidade de resposta em tempo real (síncrona) do usuário.
-
-🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
-
-# 📋 CHECKLIST DEFINITIVO: INTEROPERABILIDADE JAVA / KOTLIN / SPRING
-
-## 📂 1. Estrutura de Arquivos e SOLID
+### 📂 1. Estrutura de Arquivos e SOLID
 * [ ] **Um Arquivo, Uma Classe:** Crie sempre um arquivo físico isolado para cada classe ou interface pública, mesmo que o Kotlin permita agrupar tudo em um arquivo só.
 * [ ] **Pastas Espelhadas:** Mantenha a mesma árvore de subpastas (ex: `domain/`, `strategy/`) tanto para `.java` quanto para `.kt` para não quebrar o padrão Strategy.
 
-## 🔒 2. Visibilidade e Escopo
+### 🔒 2. Visibilidade e Escopo
 * [ ] **Xerife do Java:** Lembre-se de digitar a palavra `public` no Java se a interface/classe precisar ser vista por subpastas. O padrão do Java é trancar no pacote (*package-private*).
 * [ ] **Padrão do Kotlin:** Lembre-se de que no Kotlin tudo já nasce `public`. Se quiser esconder algo no mesmo pacote, use o modificador `internal`.
 
-## 🧬 3. Herança e Extensões
+### 🧬 3. Herança e Extensões
 * [ ] **Classes Abertas:** Se precisar estender uma classe Kotlin no Java, você é obrigado a marcá-la com a palavra-chave `open class` no Kotlin (já que lá elas nascem fechadas/`final`).
 * [ ] **Substituição de Liskov (LSP):** Garanta contratos idênticos. Não mude o comportamento esperado das assinaturas dos métodos ao transitar entre as linguagens.
 
-## 🍃 4. Framework (Spring Boot)
+### 🍃 4. Framework (Spring Boot)
 * [ ] **Injeção Limpa:** Use injeção de dependência via construtor. O Spring resolve isso de forma idêntica tanto no Java quanto no Kotlin, dispensando o uso do `@Autowired`.
 * [ ] **Tratamento de Nulos:** Atente-se ao *Null Safety* do Kotlin. Parâmetros injetados que podem vir vazios do ecossistema Java precisam do caractere `?` no tipo do Kotlin.
 
 ---
 
-## 🚀 Comando de Limpeza (Obrigatório antes de virar a chave)
+### 🚀 Comando de Limpeza (Obrigatório antes de virar a chave)
 Sempre limpe os resíduos de compilação da linguagem anterior antes de testar o build da outra:
 mvn clean compile
 
 ---
 
-## 🧠 Tópicos de Bloco I (Conhecimentos Gerais) Integrados ao Código
+### 🧠 Tópicos de Bloco I (Conhecimentos Gerais) Integrados ao Código
 
 Para blindar o Task I da prova (onde é proibido zerar qualquer matéria), os conceitos teóricos serão mapeados em comentários explicativos diretamente nas classes de teste:
 
@@ -351,7 +317,7 @@ Para blindar o Task I da prova (onde é proibido zerar qualquer matéria), os co
 
 ---
 
-## 🛠️ Comandos Globais de Sobrevivência do Laboratório
+### 🛠️ Comandos Globais de Sobrevivência do Laboratório
 
 Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
 
@@ -391,6 +357,40 @@ Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
     });
 
 ```
+
+## 📋 Anotações gerais
+
+🧱 Basicamente, o que ja possuo um Sistema transacional que:
+- [x] 🌐 Recebe uma requisição da web─> [ WebServer.java / index.html ]
+- [x] ⚡ Trata a concorrência e duplicidade em cache ──> [ PagamentoIdempotenteRedisRepository.java ]
+- [x] 💾 Persiste em banco SQL ─> [ PagamentoPostgresRepository.java ]
+- [x] 📨 Notifica o cliente final ─> [ EmailNotificadorService.java ]
+- [x] 🧪 Faz testes unitários ──> [ CheckoutSOLIDTest.java ]
+- [x] 🧩 Aplica polimorfismo e padrões SOLID no domínio ──> [ domain/MetodoPagamento.java / Switch Executions ]
+- [x] ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
+
+🧠Você aprendeu que:
+- [x] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
+- [x] as anotações do pacote jakarta.persistence.* (@Entity, @Table, @Id, @Column) servem para definir o Mapeamento Objeto-Relacional (ORM), ligando classes Java diretamente a tabelas de bancos relacionais de forma padronizada. Fazem parte do pacote oficial jakarta.persistence.*.
+- [x] o EntityManager gerencia o ciclo de vida das entidades, e quem implementa suas operações traduzindo objetos em comandos SQL (INSERT, SELECT, etc.) por baixo dos panos é o Hibernate. org.hibernate.*.
+- [x] o ORM é usado quando temos domínios complexos, forte navegação entre objetos e ganho de produtividade em CRUDs, devendo ser evitado (preferindo JDBC puro ou JdbcTemplate) em processamentos em lote massivos (Batch) ou relatórios de performance extrema.
+- [x] a grande evolução do seu laboratório consiste em sair da injeção de dependências manual com o operador new (Lab 01) para delegar o ciclo de vida dos componentes ao Spring Framework (Tasks 02 em diante) através de contêineres de Inversão de Controle (IoC).
+
+❌ Falta aprender:
+- [ ] Resiliência (Circuit Breaker / Fail-Open): Não deixar o colapso do Redis derrubar o Checkout.
+- [ ] Camada de Concorrência SQL: Adicionar uma coluna chave_idempotencia VARCHAR UNIQUE na tabela tb_pagamentos.
+- [ ] Gerenciamento de Threads: Setar um ThreadPoolExecutor no WebServer.
+- [ ] Limpeza de Trava: Excluir a chave do Redis caso o bloco do Postgres lance uma exceção, liberando o cliente para tentar novamente.
+- [ ] Rest e RestFull
+
+🤔Spring = "transforma em objetos" = Inversão de Controle (IoC) = new = fabricar = orientado objeto
+new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
+
+🤔mensageria -> pode resolver depois / Cirtuit Break -> tem que resolver na hora fallback
+(Escrita) Circuit Breaker com Fallback assíncrono (Mensageria/Filas) para garantir a consistência eventual.
+(Leitura) Circuit Breaker com Fallback síncrono (Cache/Valores Padrão). A mensageria não se aplica porque viola a necessidade de resposta em tempo real (síncrona) do usuário.
+
+🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
 
 
 <!--
