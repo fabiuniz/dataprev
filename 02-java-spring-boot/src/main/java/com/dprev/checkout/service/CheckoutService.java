@@ -1,5 +1,6 @@
 package com.dprev.checkout.service;
 
+import com.dprev.checkout.notification.Notificador;
 import com.dprev.checkout.domain.MetodoPagamento;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
