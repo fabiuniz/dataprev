@@ -1,7 +1,7 @@
 package com.dprev.checkout.config;
 
-import com.dprev.checkout.repository.PagamentoIdempotenteRedisRepository;
 import com.dprev.checkout.repository.PagamentoPostgresRepository;
+import com.dprev.checkout.repository.PagamentoIdempotenteRedisRepository;
 import com.dprev.checkout.repository.PagamentoRepository;
 import com.dprev.checkout.service.IdempotencyKeyGenerator;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,20 +17,20 @@ public class CheckoutConfig {
         return new IdempotencyKeyGenerator();
     }
 
-    // 1. Cria o banco puro com um nome específico
+    // 1. Registramos o Postgres explicitamente com um nome/qualificador único
     @Bean
-    @Qualifier("postgresRepository")
+    @Qualifier("postgresRepo")
     public PagamentoRepository pagamentoPostgresRepository() {
         return new PagamentoPostgresRepository();
     }
 
-    // 2. Cria o Redis injetando explicitamente o banco puro pelo nome (@Qualifier)
+    // 2. Registramos o Redis (Decorator) injetando o Postgres de forma segura pelo @Qualifier
     @Bean
-    @Primary
+    @Primary // Diz ao Spring: "Se alguém pedir PagamentoRepository sem especificar, use este!"
     public PagamentoRepository pagamentoRepository(
-            @Qualifier("postgresRepository") PagamentoRepository pagamentoPostgresRepository, 
+            @Qualifier("postgresRepo") PagamentoRepository postgresRepo, 
             IdempotencyKeyGenerator idempotencyKeyGenerator) {
         
-        return new PagamentoIdempotenteRedisRepository(pagamentoPostgresRepository, idempotencyKeyGenerator);
+        return new PagamentoIdempotenteRedisRepository(postgresRepo, idempotencyKeyGenerator);
     }
 }
