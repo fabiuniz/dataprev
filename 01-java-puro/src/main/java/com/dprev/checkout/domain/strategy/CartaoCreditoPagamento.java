@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.cartao;
+package com.dprev.checkout.domain.strategy;
 import com.dprev.checkout.domain.MetodoPagamento;
 import com.dprev.checkout.domain.Estornavel;
 

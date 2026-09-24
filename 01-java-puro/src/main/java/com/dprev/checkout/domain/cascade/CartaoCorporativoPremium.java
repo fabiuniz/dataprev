@@ -1,6 +1,6 @@
-package com.dprev.checkout.domain.cartao;
+package com.dprev.checkout.domain.cascade;
 
-import com.dprev.checkout.domain.cartao.CartaoBase;
+import com.dprev.checkout.domain.base.CartaoBase;
 import com.dprev.checkout.domain.PagamentoInternacional;
 
 // O APOGEU DA CASCATA DE REUTILIZAÇÃO E CONTRATOS:

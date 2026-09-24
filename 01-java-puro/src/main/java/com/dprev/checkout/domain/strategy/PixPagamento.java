@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.pix;
+package com.dprev.checkout.domain.strategy;
 import com.dprev.checkout.domain.MetodoPagamento;
 
 // [🟨L] - LISKOV SUBSTITUTION PRINCIPLE: Substitui a interface mãe perfeitamente sem quebras de comportamento.

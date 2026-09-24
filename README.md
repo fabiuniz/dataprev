@@ -392,8 +392,42 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 
 🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
 
+```bash
+flowchart TD
+    subgraph Spec ["📋 1. Especificações (O Contrato / O 'Quê')"]
+        Jakarta["Jakarta EE / JPA / MicroProfile <br> *(Regras abstratas e padrões)*"]
+    end
+
+    subgraph Frameworks ["⚙️ 2. Frameworks & Implementações (O 'Como')"]
+        Quarkus["Quarkus <br> *(Foco em compilação e nuvem)*"]
+        Spring["Spring Boot <br> *(Foco em ecossistema corporativo)*"]
+    end
+
+    subgraph Engines ["🚀 3. Motores de Execução & Compilação (Baixo Nível)"]
+        JVM["JVM Tradicional (HotSpot) <br> *(Interpretação e JIT em tempo de execução)*"]
+        Graal["GraalVM (Native Image) <br> *(Binário nativo puro / Boot instantâneo)*"]
+    end
+
+    %% Conexões
+    Jakarta -->|Implementado e adotado por| Quarkus
+    Jakarta -->|Implementado parcialmente por| Spring
+    
+    Quarkus -->|Pode rodar em cima da| JVM
+    Quarkus -->|Pode compilar para binário via| Graal
+    
+    Spring -->|Roda tradicionalmente na| JVM
+    Spring -->|Pode usar suporte parcial do| Graal
+
+```
 
 <!--
 require -> No Kotlin, você diz o que espera que aconteça (valor <= 300.0).
 if -> No Java, você diz o que não pode acontecer (if (valor > 300.0)).
+Atomicidade
+
+Quarkus
+GraalVM
+
+
 -->
+

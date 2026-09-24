@@ -4,10 +4,10 @@ import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.dprev.checkout.domain.MetodoPagamento;
-import com.dprev.checkout.domain.pix.PixPagamento;
-import com.dprev.checkout.domain.cartao.CartaoCreditoPagamento;
-import com.dprev.checkout.domain.boleto.BoletoPagamento;
-import com.dprev.checkout.domain.vr.ValeRefeicaoPagamento;
+import com.dprev.checkout.domain.strategy.PixPagamento;
+import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
+import com.dprev.checkout.domain.strategy.BoletoPagamento;
+import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
 
 import java.io.IOException;
 import java.io.InputStream;

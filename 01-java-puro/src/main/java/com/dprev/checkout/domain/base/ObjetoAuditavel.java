@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.cartao;
+package com.dprev.checkout.domain.base;
 // Em Java, as classes já são abertas (open) por padrão para herança
 // [🟥S] - SINGLE RESPONSIBILITY PRINCIPLE: Esta classe cuida UNICAMENTE de logs e auditoria.
 public class ObjetoAuditavel {

@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.cartao;
+package com.dprev.checkout.domain.base;
 import com.dprev.checkout.domain.MetodoPagamento;
 
 // CASCATA DE EXTENDS (Mãe): Puxa os logs de segurança de 'ObjetoAuditavel' para dentro.

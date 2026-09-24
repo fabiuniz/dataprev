@@ -5,11 +5,11 @@ import com.dprev.checkout.notification.Notificador;
 import com.dprev.checkout.repository.PagamentoRepository;
 import com.dprev.checkout.repository.PagamentoSqliteRepository;
 import com.dprev.checkout.domain.MetodoPagamento;
-import com.dprev.checkout.domain.pix.PixPagamento;
-import com.dprev.checkout.domain.cartao.CartaoCreditoPagamento;
-import com.dprev.checkout.domain.cartao.CartaoCorporativoPremium;
-import com.dprev.checkout.domain.boleto.BoletoPagamento;
-import com.dprev.checkout.domain.vr.ValeRefeicaoPagamento;
+import com.dprev.checkout.domain.strategy.PixPagamento;
+import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
+import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium;
+import com.dprev.checkout.domain.strategy.BoletoPagamento;
+import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
 
 public class CheckoutSOLIDTest {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.vr;
+package com.dprev.checkout.domain.strategy;
 import com.dprev.checkout.domain.MetodoPagamento;
 
 // [🟨L] - COMO VIOLAR O LISKOV SUBSTITUTION PRINCIPLE (CONCEITO VISUAL):

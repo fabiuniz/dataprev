@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.boleto;
+package com.dprev.checkout.domain.strategy;
 import com.dprev.checkout.domain.MetodoPagamento;
 
 // [🟩O] - Demonstração do OCP: Classe plugável adicionada ao ecossistema sem alterar os serviços centrais.
