@@ -12,11 +12,16 @@ import java.util.List;
 
 public class PagamentoPostgresRepository implements PagamentoRepository {
 
-    @Value("${spring.datasource.url}") private static final String HOST = "localhost";
-    private static final String PORT = "5432";
-    private static final String DB_NAME = "checkout_db";
-    @Value("${spring.datasource.username}") private static final String USER = "postgres";
-    @Value("${spring.datasource.password}") private static final String PASSWORD = "1234";
+    @Value("${spring.datasource.db.host}")
+    private String HOST;
+    @Value("${spring.datasource.db.port}")
+    private String PORT;
+    @Value("${spring.datasource.db.name}")
+    private String DB_NAME;
+    @Value("${spring.datasource.username}")
+    private String USER;
+    @Value("${spring.datasource.password}")
+    private String PASSWORD;
 
     private Connection getConnection() throws Exception {
         // Carrega o driver do Postgres em runtime (Java Puro)

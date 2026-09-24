@@ -11,10 +11,14 @@ public class PagamentoIdempotenteRedisRepository implements PagamentoRepository 
     private final PagamentoRepository proximoRepository;
     private final IdempotencyKeyGenerator keyGenerator;
     
-    @Value("${redis.host}") private String REDIS_HOST = "localhost";
-    @Value("${redis.port}") private int REDIS_PORT = 6379;
-    private static final String REDIS_USER = "default";
-    private static final String REDIS_PASSWORD = "SuaSenhaSuperSegura123";
+    @Value("${redis.host}") 
+    private String REDIS_HOST;
+    @Value("${redis.port}") 
+    private int REDIS_PORT;
+    @Value("${redis.user}")
+    private String REDIS_USER;
+    @Value("${redis.password}")
+    private String REDIS_PASSWORD;
 
     public PagamentoIdempotenteRedisRepository(PagamentoRepository proximoRepository, IdempotencyKeyGenerator keyGenerator) {
         this.proximoRepository = proximoRepository;
