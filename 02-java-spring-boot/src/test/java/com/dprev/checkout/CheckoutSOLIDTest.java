@@ -12,10 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class CheckoutSOLIDTest {
-
-    @Autowired
-    private CheckoutService checkout;
-
+    @Autowired private CheckoutService checkout;
+    @Autowired private PixPagamento pix;
+    @Autowired private CartaoCreditoPagamento cartaoCredito;
+    
     @Test
     public void executarTestesSolid() {
         System.out.println("\n🧪 ========================================================");

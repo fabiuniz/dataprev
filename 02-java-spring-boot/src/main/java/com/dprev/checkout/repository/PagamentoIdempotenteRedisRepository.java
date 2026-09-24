@@ -1,6 +1,7 @@
 package com.dprev.checkout.repository;
 
 import com.dprev.checkout.domain.MetodoPagamento;
+import org.springframework.beans.factory.annotation.Value;
 import com.dprev.checkout.service.IdempotencyKeyGenerator;
 import redis.clients.jedis.Jedis;
 import java.util.List;
@@ -10,8 +11,8 @@ public class PagamentoIdempotenteRedisRepository implements PagamentoRepository 
     private final PagamentoRepository proximoRepository;
     private final IdempotencyKeyGenerator keyGenerator;
     
-    private static final String REDIS_HOST = "localhost";
-    private static final int REDIS_PORT = 6379;
+    @Value("${redis.host}") private static final String REDIS_HOST = "localhost";
+    @Value("${redis.port}") private static final int REDIS_PORT = 6379;
     private static final String REDIS_USER = "default";
     private static final String REDIS_PASSWORD = "SuaSenhaSuperSegura123";
 

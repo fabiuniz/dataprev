@@ -1,6 +1,7 @@
 package com.dprev.checkout.repository;
 
 import com.dprev.checkout.domain.MetodoPagamento;
+import org.springframework.beans.factory.annotation.Value;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,11 +12,11 @@ import java.util.List;
 
 public class PagamentoPostgresRepository implements PagamentoRepository {
 
-    private static final String HOST = "localhost";
+    @Value("${spring.datasource.url}") private static final String HOST = "localhost";
     private static final String PORT = "5432";
     private static final String DB_NAME = "checkout_db";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "1234";
+    @Value("${spring.datasource.username}") private static final String USER = "postgres";
+    @Value("${spring.datasource.password}") private static final String PASSWORD = "1234";
 
     private Connection getConnection() throws Exception {
         // Carrega o driver do Postgres em runtime (Java Puro)

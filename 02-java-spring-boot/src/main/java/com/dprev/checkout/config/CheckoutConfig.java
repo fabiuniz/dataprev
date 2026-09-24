@@ -19,7 +19,7 @@ public class CheckoutConfig {
 
     // 1. Cria o banco puro com um nome específico
     @Bean
-    @Qualifier("bancoPuro")
+    @Qualifier("postgresRepository")
     public PagamentoRepository pagamentoPostgresRepository() {
         return new PagamentoPostgresRepository();
     }
@@ -28,7 +28,7 @@ public class CheckoutConfig {
     @Bean
     @Primary
     public PagamentoRepository pagamentoRepository(
-            @Qualifier("bancoPuro") PagamentoRepository pagamentoPostgresRepository, 
+            @Qualifier("postgresRepository") PagamentoRepository pagamentoPostgresRepository, 
             IdempotencyKeyGenerator idempotencyKeyGenerator) {
         
         return new PagamentoIdempotenteRedisRepository(pagamentoPostgresRepository, idempotencyKeyGenerator);
