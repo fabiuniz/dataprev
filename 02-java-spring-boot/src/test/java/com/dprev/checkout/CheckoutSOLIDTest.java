@@ -12,22 +12,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class CheckoutSOLIDTest {
+
     @Autowired private CheckoutService checkout;
+    
+    // Injetando todas as estratégias gerenciadas pelo Spring IoC
     @Autowired private PixPagamento pix;
     @Autowired private CartaoCreditoPagamento cartaoCredito;
+    @Autowired private BoletoPagamento boleto;
+    @Autowired private CartaoCorporativoPremium cartaoCorp;
+    @Autowired private ValeRefeicaoPagamento vr;
     
     @Test
     public void executarTestesSolid() {
         System.out.println("\n🧪 ========================================================");
         System.out.println("🧪 INICIANDO SUITE DE TESTES COMPLETA DE SOLID (SPRING BOOT)");
         System.out.println("🧪 ========================================================");
-
-        // Instanciando os métodos de pagamento do laboratório
-        PixPagamento pix = new PixPagamento();
-        CartaoCreditoPagamento cartaoCredito = new CartaoCreditoPagamento();
-        BoletoPagamento boleto = new BoletoPagamento();
-        CartaoCorporativoPremium cartaoCorp = new CartaoCorporativoPremium();
-        ValeRefeicaoPagamento vr = new ValeRefeicaoPagamento();
 
         // =====================================================================
         // CENÁRIO 1: Processamento Polimórfico Padrão

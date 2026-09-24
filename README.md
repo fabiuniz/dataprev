@@ -427,7 +427,7 @@ Atomicidade
 
 Quarkus
 GraalVM
-
-
+Perguntas frequentes
+    Entre 01-java-puro e 02-java-spring-boot o que posso afirmar que esta errado!
 -->
 
