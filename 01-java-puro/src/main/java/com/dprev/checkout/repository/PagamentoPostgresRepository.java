@@ -1,5 +1,6 @@
 package com.dprev.checkout.repository;
 
+import com.dprev.checkout.config.AppConfig;
 import com.dprev.checkout.domain.MetodoPagamento;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -11,11 +12,11 @@ import java.util.List;
 
 public class PagamentoPostgresRepository implements PagamentoRepository {
 
-    private static final String HOST = "localhost";
-    private static final String PORT = "5432";
-    private static final String DB_NAME = "checkout_db";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "1234";
+    private final String HOST = AppConfig.get("db.host", "localhost");
+    private final String PORT = AppConfig.get("db.port", "5432");
+    private final String DB_NAME = AppConfig.get("db.name", "checkout_db");
+    private final String USER = AppConfig.get("db.user", "postgres");
+    private final String PASSWORD = AppConfig.get("db.password", "1234");
 
     private Connection getConnection() throws Exception {
         // Carrega o driver do Postgres em runtime (Java Puro)

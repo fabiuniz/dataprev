@@ -1,5 +1,6 @@
 package com.dprev.checkout.repository;
 
+import com.dprev.checkout.config.AppConfig;
 import com.dprev.checkout.domain.MetodoPagamento;
 import com.dprev.checkout.service.IdempotencyKeyGenerator;
 import redis.clients.jedis.Jedis;
@@ -10,10 +11,10 @@ public class PagamentoIdempotenteRedisRepository implements PagamentoRepository 
     private final PagamentoRepository proximoRepository;
     private final IdempotencyKeyGenerator keyGenerator;
     
-    private static final String REDIS_HOST = "localhost";
-    private static final int REDIS_PORT = 6379;
-    private static final String REDIS_USER = "default";
-    private static final String REDIS_PASSWORD = "SuaSenhaSuperSegura123";
+    private static final String REDIS_HOST = AppConfig.get("redis.host", "localhost");
+    private static final int REDIS_PORT = AppConfig.getInt("redis.port", 6379);
+    private static final String REDIS_USER = AppConfig.get("redis.user", "default");
+    private static final String REDIS_PASSWORD = AppConfig.get("redis.password", "SuaSenhaSuperSegura123");
 
     public PagamentoIdempotenteRedisRepository(PagamentoRepository proximoRepository, IdempotencyKeyGenerator keyGenerator) {
         this.proximoRepository = proximoRepository;
