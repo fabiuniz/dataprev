@@ -34,25 +34,31 @@ public class PagamentoIdempotenteRedisRepository implements PagamentoRepository 
 
         try (Jedis jedis = new Jedis(REDIS_HOST, REDIS_PORT)) {
             // Autentica no Redis
-            jedis.auth(REDIS_USER, REDIS_PASSWORD); 
+            jedis.auth(REDIS_USER, REDIS_PASSWORD);  
             
             System.out.println("🗄️[REDIS REAL] Conectado e autenticado com sucesso ✅!");
-            // 🔍 Verificação de idempotência real no banco em memória
-            if (jedis.exists(chaveIdempotencia)) {
-                System.err.println("❌ [REDIS BLOQUEIO] Chave '" + chaveIdempotencia + "' ativa!");
+
+            // 🚀 ABORDAGEM ATÔMICA CORRETA: Tenta gravar direto com NX e EX (10 segundos)
+            // Se a chave já existir, o Redis retorna null. Se não existir, grava e retorna "OK".
+            String resultado = jedis.set(
+                chaveIdempotencia, 
+                "processando", 
+                new redis.clients.jedis.params.SetParams().nx().ex(10)
+            );
+
+            // Se o resultado for nulo, significa que a chave já estava lá (requisição duplicada)
+            if (resultado == null) {
+                System.err.println("❌ [REDIS BLOQUEIO] Chave '" + chaveIdempotencia + "' já está em processamento!");
                 throw new IllegalStateException("Requisição duplicada em processamento. Tente novamente em breve.");
             }
 
-            // ⏱️ Se não existir, salva a chave com TTL (Time-To-Live) de 10 segundos
-            // NX = Só define se não existir / EX = Tempo em segundos
-            jedis.set(chaveIdempotencia, "processando", new redis.clients.jedis.params.SetParams().nx().ex(10));
-            System.out.println("🗄️ [REDIS] Chave 🔑 " + chaveIdempotencia + " travada por 10s.");
+            System.out.println("🗄️ [REDIS] Chave 🔑 " + chaveIdempotencia + " travada com sucesso por 10s.");
 
         } catch (IllegalStateException e) {
             throw e; // Repassa bloqueios de idempotência legítimos
         } catch (Exception e) {
             System.err.println("🚨 [REDIS FAIL-OPEN] Erro de infraestrutura no Redis. Prosseguindo direto para o Banco: " + e.getMessage());
-            skipRedis = true; // Se o Redis morrer, o sistema não para (Fail-Open)
+            skipRedis = true; // Se o Redis falhar, aplica o Fail-Open
         }
 
         try {
