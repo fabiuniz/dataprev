@@ -1,13 +1,13 @@
 package com.dprev.checkout;
 
-import com.dprev.checkout.service.CheckoutService;
-import com.dprev.checkout.service.WebServer;
-import com.dprev.checkout.notification.EmailNotificadorService;
-import com.dprev.checkout.repository.PagamentoRepository;
-import com.dprev.checkout.notification.Notificador;
-import com.dprev.checkout.repository.PagamentoPostgresRepository;
-import com.dprev.checkout.repository.PagamentoIdempotenteRedisRepository;
-import com.dprev.checkout.service.IdempotencyKeyGenerator;
+import com.dprev.checkout.modules.pagamento.service.CheckoutService;
+import com.dprev.checkout.modules.pagamento.service.WebServer;
+import com.dprev.checkout.modules.pagamento.notification.EmailNotificadorService;
+import com.dprev.checkout.modules.pagamento.repository.PagamentoRepository;
+import com.dprev.checkout.modules.pagamento.notification.Notificador;
+import com.dprev.checkout.modules.pagamento.repository.PagamentoPostgresRepository;
+import com.dprev.checkout.modules.pagamento.repository.PagamentoIdempotenteRedisRepository;
+import com.dprev.checkout.modules.pagamento.service.IdempotencyKeyGenerator;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Main {
         System.out.println("🚀 ========================================================");
 
         // 1. Injeção de dependências corporativa manual
-        Notificador notificador = new com.dprev.checkout.notification.SqsNotificadorService();
+        Notificador notificador = new com.dprev.checkout.modules.pagamento.notification.SqsNotificadorService();
         PagamentoRepository repository = new PagamentoPostgresRepository();
         IdempotencyKeyGenerator keyGenerator = new IdempotencyKeyGenerator();
         PagamentoRepository repositoryComRedis = new PagamentoIdempotenteRedisRepository(repository, keyGenerator);

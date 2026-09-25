@@ -1,15 +1,15 @@
 package com.dprev.checkout.test;
 
-import com.dprev.checkout.service.CheckoutService;
-import com.dprev.checkout.notification.Notificador;
-import com.dprev.checkout.repository.PagamentoRepository;
-import com.dprev.checkout.repository.PagamentoSqliteRepository;
-import com.dprev.checkout.domain.MetodoPagamento;
-import com.dprev.checkout.domain.strategy.PixPagamento;
-import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento;
-import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium;
-import com.dprev.checkout.domain.strategy.BoletoPagamento;
-import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento;
+import com.dprev.checkout.modules.pagamento.service.CheckoutService;
+import com.dprev.checkout.modules.pagamento.notification.Notificador;
+import com.dprev.checkout.modules.pagamento.repository.PagamentoRepository;
+import com.dprev.checkout.modules.pagamento.repository.PagamentoSqliteRepository;
+import com.dprev.checkout.modules.pagamento.domain.MetodoPagamento;
+import com.dprev.checkout.modules.pagamento.domain.strategy.PixPagamento;
+import com.dprev.checkout.modules.pagamento.domain.strategy.CartaoCreditoPagamento;
+import com.dprev.checkout.modules.pagamento.domain.cascade.CartaoCorporativoPremium;
+import com.dprev.checkout.modules.pagamento.domain.strategy.BoletoPagamento;
+import com.dprev.checkout.modules.pagamento.domain.strategy.ValeRefeicaoPagamento;
 
 public class CheckoutSOLIDTest {
     public static void main(String[] args) {
