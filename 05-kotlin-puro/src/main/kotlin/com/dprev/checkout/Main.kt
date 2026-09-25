@@ -2,11 +2,11 @@
 
 package com.dprev.checkout
 
-import com.dprev.checkout.service.WebServer
-import com.dprev.checkout.service.CheckoutService
-import com.dprev.checkout.service.EmailNotificadorService
-import com.dprev.checkout.domain.strategy.*
-import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium
+import com.dprev.checkout.modules.pagamento.service.WebServer
+import com.dprev.checkout.modules.pagamento.service.CheckoutService
+import com.dprev.checkout.modules.pagamento.service.EmailNotificadorService
+import com.dprev.checkout.modules.pagamento.domain.strategy.*
+import com.dprev.checkout.modules.pagamento.domain.cascade.CartaoCorporativoPremium
 
 fun main() {
     // 1. Sobe o servidor HTTP nativo na porta 8080 permitindo conexões externas

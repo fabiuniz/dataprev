@@ -1,8 +1,8 @@
 package com.dprev.checkout
 
-import com.dprev.checkout.domain.strategy.*
-import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium
-import com.dprev.checkout.service.CheckoutService
+import com.dprev.checkout.modules.pagamento.domain.strategy.*
+import com.dprev.checkout.modules.pagamento.domain.cascade.CartaoCorporativoPremium
+import com.dprev.checkout.modules.pagamento.service.CheckoutService
 
 // Removemos o //@Component e a interface CommandLineRunner
 public class RunnerEstudos(

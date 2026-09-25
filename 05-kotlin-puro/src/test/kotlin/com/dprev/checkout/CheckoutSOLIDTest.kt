@@ -1,8 +1,8 @@
 package com.dprev.checkout
 
-import com.dprev.checkout.service.CheckoutService
-import com.dprev.checkout.service.Notificador
-import com.dprev.checkout.domain.strategy.PixPagamento
+import com.dprev.checkout.modules.pagamento.service.CheckoutService
+import com.dprev.checkout.modules.pagamento.service.Notificador
+import com.dprev.checkout.modules.pagamento.domain.strategy.PixPagamento
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertTrue
 

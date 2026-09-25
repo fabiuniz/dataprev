@@ -1,0 +1,23 @@
+// ❌ Não praticar essa estrutura para manter compatibilidade mútua entre Java/Spring e Kotlin.
+
+package com.dprev.checkout.modules.pagamento.domain
+
+// [🟦I] - INTERFACE SEGREGATION PRINCIPLE & COMPARAÇÃO JAVA: Interfaces pequenas e coesas. 
+// Evita forçar clientes a dependerem de métodos que não utilizam. O Kotlin permite agrupar todas 
+// essas definições em um único arquivo, reduzindo drasticamente a quantidade de arquivos físicos necessários no projeto.
+// KOTLIN REVOLUTION: Multi-file agrupado. O Kotlin permite colocar várias interfaces/classes
+// correlacionadas no mesmo arquivo físico se fizer sentido para o design. Menos arquivos inúteis.
+
+public interface xMetodoPagamento {
+    public fun processar(valor: Double)
+}
+
+public interface xEstornavel {
+    public fun estornar(valor: Double)
+}
+
+// [🟩O] - OPEN-CLOSED PRINCIPLE: A interface 'Estornavel' é estendida para suportar transações 
+// internacionais sem que o contrato original de estorno precise ser modificado ou poluído.
+public interface xPagamentoInternacional : Estornavel {
+    public fun processarTransacaoInternacional(moedaEstrangeira: String)
+}
