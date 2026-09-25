@@ -1,9 +1,8 @@
 // ❌ Não praticar essa estrutura para manter compatibilidade mútua entre Java/Spring e Kotlin.
 
-package com.dprev.checkout.domain.strategy
+package com.dprev.checkout.modules.pagamento.domain.strategy
 
-import com.dprev.checkout.domain.MetodoPagamento
-import com.dprev.checkout.domain.Estornavel
+import com.dprev.checkout.modules.pagamento.domain.MetodoPagamento
 import org.springframework.stereotype.Component
 
 // [🟩O] - OPEN-CLOSED PRINCIPLE & COMPARAÇÃO JAVA: O padrão Strategy permite adicionar novas formas de pagamento 
@@ -12,11 +11,8 @@ import org.springframework.stereotype.Component
 // A sintaxe limpa do Kotlin reduz cada classe a apenas algumas linhas legíveis.
 
 @Component
-public class CartaoCreditoPagamento : MetodoPagamento, Estornavel {
+public class PixPagamento : MetodoPagamento {
     public override fun processar(valor: Double) {
-        println("Cartão: Transacionando R$ $valor na operadora.")
-    }
-    public override fun estornar(valor: Double) {
-        println("Cartão: Estornando R$ $valor na fatura.")
+        println("PIX: Gerando QR Code no valor de R$ $valor")
     }
 }

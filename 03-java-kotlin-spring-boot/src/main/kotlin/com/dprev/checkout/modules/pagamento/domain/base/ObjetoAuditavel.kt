@@ -1,4 +1,4 @@
-package com.dprev.checkout.domain.base
+package com.dprev.checkout.modules.pagamento.domain.base
 
 // [🟥S] - SINGLE RESPONSIBILITY PRINCIPLE: Possui uma única razão para mudar: a lógica de auditoria.
 // [🟩O] - OPEN-CLOSED PRINCIPLE & COMPARAÇÃO KOTLIN: Por padrão em Java, toda classe é aberta (open) para 

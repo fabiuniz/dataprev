@@ -1,7 +1,7 @@
-package com.dprev.checkout.domain.cascade
+package com.dprev.checkout.modules.pagamento.domain.cascade
 
-import com.dprev.checkout.domain.base.CartaoBase
-import com.dprev.checkout.domain.PagamentoInternacional
+import com.dprev.checkout.modules.pagamento.domain.base.CartaoBase
+import com.dprev.checkout.modules.pagamento.domain.PagamentoInternacional
 import org.springframework.stereotype.Component
 
 // [🟩O] - OPEN-CLOSED PRINCIPLE: Nova funcionalidade (cartão premium internacional) adicionada via extensão, sem modificar o código existente.

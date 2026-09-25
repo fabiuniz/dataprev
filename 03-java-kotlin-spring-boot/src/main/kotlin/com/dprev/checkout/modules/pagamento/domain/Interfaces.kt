@@ -1,6 +1,6 @@
 // ❌ Não praticar essa estrutura para manter compatibilidade mútua entre Java/Spring e Kotlin.
 
-package com.dprev.checkout.domain
+package com.dprev.checkout.modules.pagamento.domain
 
 // [🟦I] - INTERFACE SEGREGATION PRINCIPLE & COMPARAÇÃO JAVA: Interfaces pequenas e coesas. 
 // Evita forçar clientes a dependerem de métodos que não utilizam. O Kotlin permite agrupar todas 
