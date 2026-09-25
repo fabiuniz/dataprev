@@ -1,11 +1,11 @@
 package com.dprev.checkout
 
-import com.dprev.checkout.domain.strategy.PixPagamento
-import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento
-import com.dprev.checkout.domain.strategy.BoletoPagamento
-import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento
-import com.dprev.checkout.domain.cascade.CartaoCorporativoPremium
-import com.dprev.checkout.service.CheckoutService
+import com.dprev.checkout.modules.pagamento.domain.strategy.PixPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.CartaoCreditoPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.BoletoPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.ValeRefeicaoPagamento
+import com.dprev.checkout.modules.pagamento.domain.cascade.CartaoCorporativoPremium
+import com.dprev.checkout.modules.pagamento.service.CheckoutService
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 

@@ -1,11 +1,11 @@
-package com.dprev.checkout.controller
+package com.dprev.checkout.modules.pagamento.controller
 
-import com.dprev.checkout.service.CheckoutService
-import com.dprev.checkout.domain.MetodoPagamento
-import com.dprev.checkout.domain.strategy.PixPagamento
-import com.dprev.checkout.domain.strategy.CartaoCreditoPagamento
-import com.dprev.checkout.domain.strategy.BoletoPagamento
-import com.dprev.checkout.domain.strategy.ValeRefeicaoPagamento
+import com.dprev.checkout.modules.pagamento.service.CheckoutService
+import com.dprev.checkout.modules.pagamento.domain.MetodoPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.PixPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.CartaoCreditoPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.BoletoPagamento
+import com.dprev.checkout.modules.pagamento.domain.strategy.ValeRefeicaoPagamento
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

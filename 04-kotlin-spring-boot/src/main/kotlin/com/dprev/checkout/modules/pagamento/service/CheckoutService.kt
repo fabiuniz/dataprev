@@ -1,6 +1,6 @@
-package com.dprev.checkout.service
+package com.dprev.checkout.modules.pagamento.service
 
-import com.dprev.checkout.domain.MetodoPagamento
+import com.dprev.checkout.modules.pagamento.domain.MetodoPagamento
 import org.springframework.stereotype.Service
 
 // [🟥S] - SINGLE RESPONSIBILITY PRINCIPLE: Sua única razão para mudar é a orquestração do fluxo de checkout do pedido.

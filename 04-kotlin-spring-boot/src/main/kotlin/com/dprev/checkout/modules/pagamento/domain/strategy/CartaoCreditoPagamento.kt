@@ -1,9 +1,9 @@
 // ❌ Não praticar essa estrutura para manter compatibilidade mútua entre Java/Spring e Kotlin.
 
-package com.dprev.checkout.domain.strategy
+package com.dprev.checkout.modules.pagamento.domain.strategy
 
-import com.dprev.checkout.domain.MetodoPagamento
-import com.dprev.checkout.domain.Estornavel
+import com.dprev.checkout.modules.pagamento.domain.MetodoPagamento
+import com.dprev.checkout.modules.pagamento.domain.Estornavel
 import org.springframework.stereotype.Component
 
 // [🟩O] - OPEN-CLOSED PRINCIPLE & COMPARAÇÃO JAVA: O padrão Strategy permite adicionar novas formas de pagamento 
