@@ -352,7 +352,7 @@ new e morre quando o Garbage Collector do Java decide = ciclo de vida de um Bean
 
 🤔Como posso evoluir esse projeto onde estou praticando tudo o que for possível com java puro e assim que não for mais possivel continuar, migrar para tecnologias mais recentes evidenciando a importancia da evolução desse ecosistema para estudar na pratica para passar nesse concurso ?
 
-```bash
+```mermaid
 flowchart TD
     subgraph Spec ["📋 1. Especificações (O Contrato / O 'Quê')"]
         Jakarta["Jakarta EE / JPA / MicroProfile <br> *(Regras abstratas e padrões)*"]
@@ -379,6 +379,7 @@ flowchart TD
     Spring -->|Pode usar suporte parcial do| Graal
 
 ```
+
 ```mermaid
 
 sequenceDiagram
@@ -457,19 +458,32 @@ Perguntas frequentes
 
 MAS e extruturas como essa ?
 
-com.dprev.checkout/
-├── core/                        # Configurações globais e infraestrutura transversal
-│   ├── config/                  # DataSource, Redis, Beans globais
-│   ├── exception/               # GlobalExceptionHandler (@RestControllerAdvice)
-│   └── security/                # Filtros e segurança (se houver)
-│
-├── modules/                     # 🚀 Evolução: Domínios isolados (Bounded Contexts)
-│   └── pagamento/
-│       ├── controller/          # CheckoutController
-│       ├── service/             # CheckoutService, IdempotencyKeyGenerator
-│       ├── domain/              # Entidades JPA, Enums, Strategies (Pix, Cartao, etc.)
-│       ├── repository/          # SpringDataPagamentoRepository (JPA) + Decorators
-│       └── notification/        # SqsNotificadorService, EmailNotificadorService
+📁 02-java-spring-boot/
+│   ├── 📁 src/
+│   │   ├── 📁 main/
+│   │   │   ├── 📁 java/
+│   │   │       └── 📁 com/
+│   │   │           └── 📁 dprev/
+│   │   │               └── 📁 checkout/
+│   │   │               │   ├── 📁 core/                  # Configurações globais e infraestrutura transversal
+│   │   │               │   │   ├── 📁 config/            # DataSource, Redis, Beans globais
+│   │   │               │   │   ├── 📁 exception/         # GlobalExceptionHandler (@RestControllerAdvice)
+│   │   │               │   │   └── 📁 security/          # Filtros e segurança (se houver)
+│   │   │                   └── 📁 modules/               # 🚀 Evolução: Domínios isolados (Bounded Contexts)
+│   │   │                       └── 📁 pagamento/
+│   │   │                       │   ├── 📁 controller/    # CheckoutController
+│   │   │                       │   ├── 📁 domain/        # Entidades JPA, Enums, Strategies (Pix       , Cartao, etc.)
+│   │   │                       │   ├── 📁 notification/  # SqsNotificadorService, EmailNotificadorService
+│   │   │                       │   ├── 📁 repository/    # SpringDataPagamentoRepository (JPA       ) + Decorators
+│   │   │                           └── 📁 service/       # CheckoutService, IdempotencyKeyGenerator
+│   │       └── 📁 resources/
+│   │           └── 📁 static/
+│       └── 📁 test/
+│           └── 📁 java/
+│               └── 📁 com/
+│                   └── 📁 dprev/
+│                       └── 📁 checkout/
+
 
 src/
 └── main/
