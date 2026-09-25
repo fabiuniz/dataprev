@@ -1,7 +1,7 @@
-package com.dprev.checkout.service
+package com.dprev.checkout.modules.pagamento.service
 
-import com.dprev.checkout.domain.CheckoutRequest
-import com.dprev.checkout.publisher.CheckoutEventPublisher
+import com.dprev.checkout.modules.pagamento.domain.CheckoutRequest
+import com.dprev.checkout.modules.pagamento.publisher.CheckoutEventPublisher
 import org.springframework.stereotype.Service
 
 @Service

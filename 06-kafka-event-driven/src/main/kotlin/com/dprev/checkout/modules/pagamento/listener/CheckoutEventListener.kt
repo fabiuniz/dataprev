@@ -1,4 +1,4 @@
-package com.dprev.checkout.listener
+package com.dprev.checkout.modules.pagamento.listener
 
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component

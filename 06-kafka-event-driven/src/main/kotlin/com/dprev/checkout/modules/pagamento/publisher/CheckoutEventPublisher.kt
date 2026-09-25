@@ -1,4 +1,4 @@
-package com.dprev.checkout.publisher
+package com.dprev.checkout.modules.pagamento.publisher
 
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component
