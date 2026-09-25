@@ -116,6 +116,23 @@ Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Ap
      
 ---
 
+### 🏛️ O Dilema das Estruturas de Pastas: Qual a "Mais Correta"?
+
+Ao estruturar aplicações em Java/Spring, é comum o dilema entre a abordagem tradicional por camadas e a Clean Architecture/DDD. **Não existe uma única resposta certa**, mas sim a escolha adequada para o escopo do projeto:
+
+#### 1. Abordagem Tradicional por Camadas (Layered Architecture)
+* **Como é:** Organizada por papéis técnicos (`controller`, `service`, `repository`, `domain`).
+* **Quando usar:** Sistemas enxutos, MVPs, microsserviços focados em entrega rápida ou APIs de escopo médio.
+* **Vantagem:** Máximo aproveitamento dos recursos do Spring Boot sem *boilerplate* excessivo de mapeamento (*mappers*).
+
+#### 2. Clean Architecture / DDD (Domain-Driven Design)
+* **Como é:** Organizada por *Bounded Contexts* e camadas concêntricas (`domain`, `application`, `infrastructure`).
+* **Quando usar:** Sistemas corporativos complexos com regras de negócio altamente voláteis e longos ciclos de vida.
+* **Vantagem:** Isola totalmente o Domínio de frameworks externos (Spring/Hibernate), permitindo trocar a infraestrutura sem afetar as regras de negócio.
+
+> **💡 Dica Prática:** Em projetos de estudo ou serviços focados em demonstrar padrões como **SOLID e Strategy** (como este checkout), a estrutura tradicional limpa é altamente recomendada, pois o ganho real de arquitetura está no **desacoplamento do comportamento**, e não na quantidade de camadas de tradução de dados.
+
+---
 ## 💻 Linguagens e Tecnologias adquiridas nesse programa de treinamento:
  - [x] Java (versão 6 ou superior)
  - [x] Javascript
@@ -197,67 +214,7 @@ Evolui de filas pontuais (SQS) para um barramento de eventos distribuído com Ap
  - [ ] Apache Kafka (Producer, Consumer e Event-Driven Architecture)
  - [ ] JaCoCo (Code Coverage e Quality Gates)
  
- ```text
-
- [Main.java] 
-   │
-   ├──> 1. Instancia os Serviços de Infraestrutura (Notificador, Repositories)
-   ├──> 2. Configura a Camada de Idempotência (Redis + Postgres via Decorator)
-   ├──> 3. Instancia o CheckoutService injetando essas dependências
-   ├──> 4. Cria as Estratégias de Pagamento (Pix, Cartão, Boleto, VR)
-   └──> 5. Passa o controle para o [RunnerEstudos.java]
-
-       ┌─────────────────────────────────────────────────────────┐
-       │                       Main.java                         │
-       │  (Cria e conecta todas as dependências no início)       │
-       └───────────────────────────┬─────────────────────────────┘
-                                   │  Instancia e conecta
-                                   ▼
- [IdempotencyKeyGenerator] ──> [RedisRepository] ──> [PostgresRepository]
-                                        │
-                                        ▼
- [EmailNotificadorService] ──> [CheckoutService] ◄── [Formas de Pagamento]
-                                        │
-                                        ▼
-                                 [RunnerEstudos] 
-                          (Roda as transações de teste)
-
-
-
-
-   [IdempotencyKeyGenerator]    [PagamentoPostgresRepository]
-           │                                │
-           └───────────────┬────────────────┘
-                           ▼
-         [PagamentoIdempotenteRedisRepository]    [EmailNotificadorService]
-                           │                                  │
-                           └────────────────┬─────────────────┘
-                                            ▼
-                                    [CheckoutService] ◄── [Estratégias de Pagamento]
-                                            │
-                                            ▼
-                                     [RunnerEstudos]
-
-```
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor WebServer as WebServer.java
-    participant Redis as PagamentoIdempotenteRedisRepository
-    participant Postgres as PagamentoPostgresRepository
-    participant Notifier as EmailNotificadorService
-
-    WebServer->>Redis: Verifica chave de idempotência
-    alt Chave existe em Cache
-        Redis-->>WebServer: Retorna duplicado (409 Conflict)
-    else Chave não encontrada
-        Redis->>Postgres: Salva transação com chave única
-        Postgres-->>Redis: Confirma persistência
-        Redis->>Notifier: Dispara notificação assíncrona
-        Notifier-->>WebServer: Resposta de Sucesso (200 OK)
-    end
-```
+---
 
 # 🗂️ Guia de Revisão Técnica (Nível Sênior/Especialista)
 
@@ -358,6 +315,8 @@ Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
 
 ```
 
+---
+
 ## 📋 Anotações gerais
 
 🧱 Basicamente, o que ja possuo um Sistema transacional que:
@@ -368,6 +327,7 @@ Cada diretório possui seus scripts independentes de ciclo de vida rápidos:
 - [x] 🧪 Faz testes unitários ──> [ CheckoutSOLIDTest.java ]
 - [x] 🧩 Aplica polimorfismo e padrões SOLID no domínio ──> [ domain/MetodoPagamento.java / Switch Executions ]
 - [x] ⚙️ Automatiza o build e o gerenciamento de dependências via script ──> [ up.sh / checkout-solid.jar ]
+- [x] 🔄 Arquitetura Evolutiva: A transição estruturada de microsserviços deve ser feita a partir de uma clara identificação de limites de contexto (Bounded Contexts) a partir do monólito (evitando o acoplamento cego e garantindo alta coesão antes de distribuir a aplicação).
 
 🧠Você aprendeu que:
 - [x] uma especificação (como o Jakarta EE / JPA) define apenas o contrato abstrato (o "quê"), enquanto a implementação (como o Hibernate) é o motor tecnológico real que executa o trabalho pesado (o "como"). e estao dentro do pacote import jakarta.persistence
@@ -419,6 +379,71 @@ flowchart TD
     Spring -->|Pode usar suporte parcial do| Graal
 
 ```
+```mermaid
+
+sequenceDiagram
+    autonumber
+    actor WebServer as WebServer.java
+    participant Redis as PagamentoIdempotenteRedisRepository
+    participant Postgres as PagamentoPostgresRepository
+    participant Notifier as EmailNotificadorService
+
+    WebServer->>Redis: Verifica chave de idempotência
+    alt Chave existe em Cache
+        Redis-->>WebServer: Retorna duplicado (409 Conflict)
+    else Chave não encontrada
+        Redis->>Postgres: Salva transação com chave única
+        Postgres-->>Redis: Confirma persistência
+        Redis->>Notifier: Dispara notificação assíncrona
+        Notifier-->>WebServer: Resposta de Sucesso (200 OK)
+    end
+
+```
+
+```text
+
+ [Main.java] 
+   │
+   ├──> 1. Instancia os Serviços de Infraestrutura (Notificador, Repositories)
+   ├──> 2. Configura a Camada de Idempotência (Redis + Postgres via Decorator)
+   ├──> 3. Instancia o CheckoutService injetando essas dependências
+   ├──> 4. Cria as Estratégias de Pagamento (Pix, Cartão, Boleto, VR)
+   └──> 5. Passa o controle para o [RunnerEstudos.java]
+
+       ┌─────────────────────────────────────────────────────────┐
+       │                       Main.java                         │
+       │  (Cria e conecta todas as dependências no início)       │
+       └───────────────────────────┬─────────────────────────────┘
+                                   │  Instancia e conecta
+                                   ▼
+ [IdempotencyKeyGenerator] ──> [RedisRepository] ──> [PostgresRepository]
+                                        │
+                                        ▼
+ [EmailNotificadorService] ──> [CheckoutService] ◄── [Formas de Pagamento]
+                                        │
+                                        ▼
+                                 [RunnerEstudos] 
+                          (Roda as transações de teste)
+
+
+
+
+   [IdempotencyKeyGenerator]    [PagamentoPostgresRepository]
+           │                                │
+           └───────────────┬────────────────┘
+                           ▼
+         [PagamentoIdempotenteRedisRepository]    [EmailNotificadorService]
+                           │                                  │
+                           └────────────────┬─────────────────┘
+                                            ▼
+                                    [CheckoutService] ◄── [Estratégias de Pagamento]
+                                            │
+                                            ▼
+                                     [RunnerEstudos]
+
+```
+
+---
 
 <!--
 require -> No Kotlin, você diz o que espera que aconteça (valor <= 300.0).
@@ -428,6 +453,58 @@ Atomicidade
 Quarkus
 GraalVM
 Perguntas frequentes
-    Entre 01-java-puro e 02-java-spring-boot o que posso afirmar que esta errado!
+    E agora podemos continuar? Entre 01-java-puro e 02-java-spring-boot o que posso afirmar que esta errado e consire também que é uma migração da aplicação! Onde devo ajustar para ser sentida essa evolução quanto for necessario ajustar a estrutura de pastas justificando a razão da evolução do sistema ?
+
+MAS e extruturas como essa ?
+
+com.dprev.checkout/
+├── core/                        # Configurações globais e infraestrutura transversal
+│   ├── config/                  # DataSource, Redis, Beans globais
+│   ├── exception/               # GlobalExceptionHandler (@RestControllerAdvice)
+│   └── security/                # Filtros e segurança (se houver)
+│
+├── modules/                     # 🚀 Evolução: Domínios isolados (Bounded Contexts)
+│   └── pagamento/
+│       ├── controller/          # CheckoutController
+│       ├── service/             # CheckoutService, IdempotencyKeyGenerator
+│       ├── domain/              # Entidades JPA, Enums, Strategies (Pix, Cartao, etc.)
+│       ├── repository/          # SpringDataPagamentoRepository (JPA) + Decorators
+│       └── notification/        # SqsNotificadorService, EmailNotificadorService
+
+src/
+└── main/
+    ├── java/
+    │   └── com/
+    │       └── dprev/
+    │           └── proposalmanagement/
+    │               ├── auth/                  # Módulo/Contexto de Autenticação
+    │               │   ├── application/       # Casos de uso de Auth
+    │               │   ├── domain/            # Regras de negócio de Auth
+    │               │   └── infrastructure/    # Adaptadores de Auth (DB, APIs externas)
+    │               │
+    │               ├── proposal/              # Módulo/Contexto de Propostas
+    │               │   ├── application/       # Casos de uso (Application Services)
+    │               │   ├── domain/            # Core do negócio (Entidades puras)
+    │               │   │   ├── Owner.java     # Agregado / Entidade de Domínio
+    │               │   │   ├── OwnerId.java   # Value Object
+    │               │   │   ├── Proposal.java  # Entidade de Domínio principal
+    │               │   │   ├── ProposalId.java# Value Object
+    │               │   │   └── ProposalRepository.java # Interface pura do Repositório (Contrato)
+    │               │   │
+    │               │   └── infrastructure/    # Detalhes técnicos (Spring Data, Hibernate)
+    │               │       └── persistence/
+    │               │           ├── entity/
+    │               │           │   └── ProposalEntity.java # Entidade JPA (Banco de Dados)
+    │               │           └── repository/
+    │               │               └── SpringDataProposalRepository.java # Implementação concreta
+    │               │
+    │               └── ProposalManagementApplication.java # Classe principal (Spring Boot Bootstrapper)
+    │
+    └── resources/                             # Arquivos de configuração (application.properties, migrations)
+│
+└── test/                                      # Testes unitários e de integração
+
+
+
 -->
 
