@@ -8,6 +8,10 @@ Tags: Fund, Dev, Skils
 path_hook: hookfigma.hook9, hookfigma.hook7, hookfigma.hook13
 -->
 
+[![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)](https://openjdk.org/)
+[![Docker](https://img.shields.io/badge/Docker-🐳-blue?style=for-the-badge&logo=docker)](https://www.docker.com/)
+[![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-💥-black?style=for-the-badge&logo=apachekafka)](https://kafka.apache.org/)
+
 # 🚀 Dataprev 2026 - Laboratório de Engenharia e Arquitetura de Software (FGV)
 
 Este repositório foi estruturado de forma híbrida e evolutiva com o objetivo de servir como laboratório prático focado 100% no edital do concurso **Dataprev (Edital 01/2026 - Banca FGV)** para o cargo de *Analista de Tecnologia da Informação - Desenvolvimento de Software*.
@@ -26,37 +30,47 @@ O projeto simula um ecossistema de **Checkout de Missão Crítica** evoluindo do
 
 solid_hybrid/
 │
-├─📁01-java-puro/                  # 🎯 Foco FGV: SOLID, Design Patterns, JDBC Cru e Cache In-Memory
-│   ├─📁 bin/                      # Binários compilados nativamente
-│   ├─📁 src/main/java/...         # Core em Java 21
-│   └─📄 up.sh                     # Infra Docker (Postgres + Redis com Senha) e compilação nativa
-├─📁02-java-spring-boot/           # 🎯 Foco FGV: Ecossistema Spring, Injeção de Dependência e Beans
-│   ├─📁 src/main/java/...         # Core em Java 21
-│   ├─📄 pom.xml                   # Gerenciamento de Dependências Maven
-│   └─📄 up.sh                     # Inicialização do ecossistema Spring Java
-├─📁03-java-kotlin-spring-boot/    # 🎯 Foco FGV: Interoperabilidade e Migração de Sistemas Legados
-│   ├─📁 src/main/java/...         # Core em Java 21
-│   ├─📁 src/main/kotlin/...       # Novas regras de negócio em Kotlin
-│   └─📄 up.sh                     # Inicialização do ecossistema
-├─📁04-kotlin-spring-boot/         # 🎯 Foco FGV: APIs Reativas, Resiliência e LGPD Bancária
-│   ├─📁 src/main/java/...         # Core em Java 21
-│   ├─📁 src/main/resources/       # Configurações de propriedades e segurança
-│   └─📄 up.sh                     # Inicialização do ecossistema
-├─📁05-kotlin-puro/                # 🎯 Foco FGV: Alta Concorrência, Threads vs Coroutines
-│   ├─📁 src/main/kotlin/...       # Estruturas puras de Kotlin, Suspend Functions e Channels
-│   └─📄 up.sh                     # Inicialização do ecossistema
-└─📁06-kafka-event-driven/         # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Mensageria e Cobertura JaCoCo
-    ├── 📁 .github/workflows/      # Pipeline de CI/CD automatizando testes e Quality Gate
-    ├── 📁 src/main/kotlin/...     # Core em Java 21 / Kotlin estruturado em camadas
-    │   ├─📁 config/               # Configuração de beans, tópicos e serialização de mensagens
-    │   ├─📁 event/                # Payloads de eventos de domínio (CheckoutRealizadoEvent)
-    │   ├─📁 producer/             # Produtores responsáveis pelo disparo de eventos assíncronos
-    │   └─📁 consumer/             # Listeners assíncronos (Consumer Groups) para notificações
-    ├── 📁 src/test/kotlin/...     # Testes integrados (Testcontainers) e relatório JaCoCo
-    ├── 📄 docker-compose.yml      # Subida local do Apache Kafka e Zookeeper
-    ├── 📄 Dockerfile              # Empacotamento containerizado da aplicação
-    ├── 📄 pom.xml                 # Dependências Spring Boot, Spring Kafka e JaCoCo Plugin
-    └── 📄 up.sh                   # Script de inicialização do cluster de mensageria e app
+├─📁 01-java-puro/                  # 🎯 Foco FGV: SOLID, Design Patterns, JDBC e Cache In-Memory
+│   ├─📁 src/main/java/...          # Core em Java 21 (Instanciação manual / new)
+│   └─📄 up.sh                      # Infra Docker (Postgres + Redis + LocalStack)
+│
+├─📁 02-java-spring-boot/           # 🎯 Foco FGV: Ecossistema Spring, IoC, Beans e Transações (@Transactional)
+│   ├─📁 src/main/java/...          # Core em Java 21 com Spring Data JPA
+│   ├─📄 pom.xml                    # Gerenciamento de Dependências Maven
+│   └─📄 up.sh                      # Inicialização do ecossistema Spring Boot
+│
+├─📁 03-java-kotlin-spring-boot/    # 🎯 Foco FGV: Interoperabilidade e Migração de Legados (Java + Kotlin)
+│   ├─📁 src/main/java/...          # Código legado/base em Java 21
+│   ├─📁 src/main/kotlin/...        # Novas regras de negócio em Kotlin
+│   └─📄 up.sh                      # Script de subida do ambiente misto
+│
+├─📁 04-kotlin-spring-boot/         # 🎯 Foco FGV: APIs Reativas, Resiliência (Resilience4j) e LGPD (AES-256)
+│   ├─📁 src/main/kotlin/...        # Implementações completas em Kotlin
+│   ├─📁 src/main/resources/        # Configurações de segurança e propriedades
+│   └─📄 up.sh                      # Script de inicialização
+│
+├─📁 05-kotlin-puro/                # 🎯 Foco FGV: Alta Concorrência, Threads vs Coroutines e Channels
+│   ├─📁 src/main/kotlin/...        # Estruturas puras de Kotlin e Suspend Functions
+│   └─📄 up.sh                      # Script de execução local
+│
+├─📁 06-java-quarkus/               # 🎯 Foco FGV: Cloud-Native, Panache, SmallRye Fault Tolerance e GraalVM
+│   ├─📁 src/main/java/...          # Core em Quarkus com CDI e RESTeasy
+│   ├─📄 README.md                  # Documentação e comparativo técnico Quarkus vs Spring
+│   ├─📄 pom.xml                    # Quarkus BOM e extensões
+│   └─📄 up.sh                      # Sobe Compose + quarkus:dev
+│
+├─📁 07-java-helidon/               # 🎯 Foco FGV: MicroProfile, JAX-RS puro e arquitetura ultraleve
+│   ├─📁 src/main/java/...          # Core em Helidon MP 4.1.2
+│   ├─📁 src/main/resources/        # Configurações microprofile-config.properties e persistence.xml
+│   └─📄 up.sh                      # Script de compilação e execução do jar
+│
+└─📁 08-kafka-event-driven/         # 🎯 Foco FGV: Arquitetura Orientada a Eventos, Spring Kafka e JaCoCo Quality Gate
+    ├── 📁 .github/workflows/       # Pipeline CI/CD automatizando testes
+    ├── 📁 src/main/kotlin/...      # Produtores, Consumers e Configurações do Kafka
+    ├── 📁 src/test/kotlin/...      # Testes e relatórios de cobertura JaCoCo
+    ├── 📄 docker-compose.yml       # Subida local do Apache Kafka e Zookeeper
+    ├── 📄 pom.xml                  # Dependências Spring Kafka e JaCoCo Plugin
+    └── 📄 up.sh                    # Script de inicialização do cluster e pipeline Maven
 
 ```
 

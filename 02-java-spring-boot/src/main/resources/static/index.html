@@ -66,7 +66,8 @@
 
         try {
             // Dispara um POST real com o JSON para o servidor nativo em Java
-            const resposta = await fetch('http://vmlinuxd:8080/api/checkout', {
+            const baseUrl = window.location.origin.replace(/:\d+\$/, ':8080'); // Garante que usa a porta 8080 'http://vmlinux-usr:8080/api/checkout'
+            const resposta = await fetch(`${baseUrl}/api/checkout`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
